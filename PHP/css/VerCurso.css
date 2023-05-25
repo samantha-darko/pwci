@@ -1,0 +1,149 @@
+.box-container {
+    display: block;
+    width: 85%;
+    margin: 0 auto;
+    background-color: #FFFFFF;
+}
+
+.info{
+    display: block;
+    width: 85%;
+    margin: 0 auto;
+    padding: 60px 0;
+}
+
+#mostrar{
+    display: block;
+    width: 80%;
+    margin: 0 auto;
+}
+
+#guardar{
+    display: none;
+    width: 80%;
+    margin: 0 auto;
+}
+
+#mostrar h1, #guardar h1{
+    display: block;
+    
+    width: 100%;
+    text-align: center;
+    font-weight: bold;
+}
+
+#mostrar img, #guardar img{
+    display: block;
+    margin: 20px auto;
+    width: 100%;
+    object-fit: contain;
+    border-radius: 5px;
+}
+
+#mostrar h2{
+    display: block;
+    width: auto;
+    margin: 10px auto;
+    font-weight: bold;
+    text-align: center;
+}
+
+#mostrar p{
+    display: block;
+    width: auto;
+    margin: 20px auto;
+    font-size: 20px;
+    text-align: center;
+}
+
+#mostrar #botones, #guardar #ebotones{
+    display: flex;
+    width: 80%;
+    margin: 40px auto 20px auto;
+}
+
+#mostrar #botones button, #guardar #ebotones button{
+    display: block;
+    width: 30%;
+    margin: 20px auto;
+
+    padding: 10px 0;
+    border-radius: 5px;    
+    border-style: none;
+    font-weight: bold;
+    cursor: pointer;
+    box-shadow: 2px 2px rgba(0, 0, 0, 0.5);
+    transition: transform .2s;
+    outline: 0 none;
+    color: #F2F2F2;
+}
+
+#mostrar #botones button:hover, #guardar #ebotones button:hover{
+    transform: scale(1.05);
+}
+
+.verde{
+    background-color: #98CA3F;
+}
+
+.rojo{
+    background-color: #FF331F;
+}
+
+#editarfoto {
+    display: block;
+    margin: 2% auto;
+    width: 100%;
+    object-fit: cover;
+}
+
+#guardar label {
+    padding: 0 0 0 10px;
+    margin: 0;
+}
+
+#guardar .division{
+    margin: 20px auto;
+    display: block;
+}
+
+#guardar .bloque{
+    display: flex;
+}
+
+.bloque div{
+    display: block;
+    margin: 0 10px;
+    width: 50%;
+}
+
+#guardar input,
+#guardar textarea {
+    width: 100%;
+    font-size: 16px;
+    padding: 10px 0 10px 15px;
+    border-radius: 5px;
+    border-color: gray;
+    border-width: 1px;
+    border-style: solid;
+    transition: transform .2s;
+    margin: 5px 0;
+}
+
+#guardar input:focus {
+    border-color: blue;
+    box-shadow: 0 1px 1px rgba(12, 22, 51, 0.075)inset, 0 0 8px rgba(7, 145, 230, 0.6);
+    border-width: 1px;
+    border-style: solid;
+    outline: 0 none;
+}
+
+#guardar p {
+    font-weight: bold;
+    font-size: 14px;
+    color: #A9281D;
+    text-align: right;
+    margin: 2px 0 5px 0;
+    padding: 0 10px 10px 0;
+    display: none;
+}
