@@ -28,35 +28,34 @@ include_once '../php/UsuarioLoggeado.php'; ?>
     </div>
 
     <div class="box-container" id="box-container">
-
-        <div id="info" class="info">
-
-            <form id="guardar" method="post">
-                <h1>Datos del Curso</h1>
-                <div class="bloquefoto">
-                    <img id="editarfoto" name="fotocurso" src="" />
-                    <label for="">Imagen del curso:</label>
-                    <input type="file" id="image" name="image" accept="image/png, image/jpeg" tabindex="0">
-                    <p id="vaciofoto">* Debe seleccionar una imagen para el curso.</p>
-                </div>
-                <div class="division">
-                    <label>Título</label>
-                    <input id="titulo" name="titulo" type="text" onkeypress="return Letters(event);" tabindex="1">
-                    <p id="cortotitulo">* El t&iacute;tulo es muy corto.</p>
-                    <p id="vaciotitulo">* No puede dejar el t&iacute;tulo vac&iacute;o.</p>
-                </div>
-                <div class="division">
-                    <label>Descripción</label>
-                    <textarea id="descripcion" name="descripcion" onkeypress="return Letters(event);"
-                        tabindex="2"></textarea>
-                    <p id="cortodescripcion">* La descripci&oacute;n es muy corta.</p>
-                    <p id="vaciodescripcion">* No puede dejar la descripci&oacute;n vac&iacute;a.</p>
-                </div>
-                <div id="ebotones" class="ebotones">
-                    <button id="btnGuardar" class="verde" type="submit" tabindex="3">Guardar</button>
-                    <button id="btnCancelar" class="rojo" type="button" tabindex="4">Cancelar</button>
-                </div>
-            </form>
+        <div class="bloques">
+            <div id="info" class="info">
+                <form id="guardar" method="post">
+                    <h1>Datos del Curso</h1>
+                    <div class="bloquefoto">
+                        <img id="editarfoto" name="fotocurso" src="" />
+                        <label for="">Imagen del curso:</label>
+                        <input type="file" id="image" name="image" accept="image/png, image/jpeg" tabindex="0">
+                        <p id="vaciofoto">* Debe seleccionar una imagen para el curso.</p>
+                    </div>
+                    <div class="division">
+                        <label>Título</label>
+                        <input id="titulo" name="titulo" type="text" onkeypress="return Letters(event);" tabindex="1">
+                        <p id="cortotitulo">* El t&iacute;tulo es muy corto.</p>
+                        <p id="vaciotitulo">* No puede dejar el t&iacute;tulo vac&iacute;o.</p>
+                    </div>
+                    <div class="division">
+                        <label>Descripción</label>
+                        <textarea id="descripcion" name="descripcion" onkeypress="return Letters(event);" tabindex="2"></textarea>
+                        <p id="cortodescripcion">* La descripci&oacute;n es muy corta.</p>
+                        <p id="vaciodescripcion">* No puede dejar la descripci&oacute;n vac&iacute;a.</p>
+                    </div>
+                    <div id="ebotones" class="ebotones">
+                        <button id="btnGuardar" class="verde" type="submit" tabindex="3">Guardar</button>
+                        <button id="btnCancelar" class="rojo" type="button" tabindex="4">Cancelar</button>
+                    </div>
+                </form>
+            </div>
         </div>
     </div>
 

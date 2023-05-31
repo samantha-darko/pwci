@@ -178,13 +178,14 @@ class ApiCurso
             $db = new DB();
             $conn = $db->connect();
 
-            $sql = ("call sp_curso(0, ?, ?, ?, ?, 0, 'I');");
+            $sql = ("call sp_curso(0, ?, ?, ?, ?, ?, 'I');");
             $stmt = $conn->prepare($sql);
 
             $stmt->bindValue(1, $datos->id_usuario_f);
             $stmt->bindValue(2, $datos->titulo);
             $stmt->bindValue(3, $datos->descripcion);
             $stmt->bindParam(4, $datos->imagen, PDO::PARAM_LOB);
+            $stmt->bindValue(5, $datos->costo);
             $stmt->execute();
 
             if ($stmt->rowCount() > 0) {

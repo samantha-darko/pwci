@@ -2,7 +2,7 @@
 <html lang="es-ES">
 <?php session_start();
 include_once "..\php\UsuarioLoggeado.php"
-    ?>
+?>
 
 <head>
     <meta charset="UTF-8">
@@ -32,7 +32,7 @@ include_once "..\php\UsuarioLoggeado.php"
         <h1>Datos del Curso</h1>
         <form id="datos" method="post" class="datoscurso">
             <div class="bloquefoto">
-                <img class="usuarioFoto" id="fotoperfil" name="fotocurso" src="" />
+                <img class="usuarioFoto" id="fotocurso" name="fotocurso" src="" />
                 <label for="">Imagen del curso:</label>
                 <input type="file" id="image" name="image" accept="image/png, image/jpeg" tabindex="0">
                 <p id="vaciofoto">* Debe seleccionar una imagen para el curso.</p>
@@ -45,30 +45,25 @@ include_once "..\php\UsuarioLoggeado.php"
             </div>
             <div class="division">
                 <label>Descripción</label>
-                <textarea id="descripcion" name="descripcion" onkeypress="return Letters(event);"
-                    tabindex="2"></textarea>
+                <textarea id="descripcion" name="descripcion" onkeypress="return Letters(event);" tabindex="2"></textarea>
                 <p id="cortodescripcion">* La descripci&oacute;n es muy corta.</p>
                 <p id="vaciodescripcion">* No puede dejar la descripci&oacute;n vac&iacute;a.</p>
             </div>
-
-            <div class="division">
-                <div class="division2">
-                    <div><label>Costo del curso:</label>
-                        <input type="number" name="costocurso" id="costocurso" tabindex="3">
-                        <p id="cerocosto">* El costo del curso no puede ser $0.</p>
-                        <p id="vaciocosto">* No puede dejar el costo del curso vac&iacute;o.</p>
-                    </div>
-
-                    <div>
-                        <label>Cantidad de niveles:</label>
-                        <input type="number" name="cantidadlvl" id="cantidadlvl" tabindex="4">
-                        <p id="cerocantidadlvl">* La cantidad de niveles no puede ser menor a 1.</p>
-                        <p id="vaciocantidadlvl">* No puede dejar la cantidad de niveles vac&iacute;o.</p>
-                    </div>
+            <div class="division2">
+                <div>
+                    <label for="rol">Selecciona un tipo de cobro:</label>
+                    <select name="tipo" id="tipo" name="tipo" tabindex="3">
+                        <option value="curso">Por curso</option>
+                        <option value="nivel">Por nivel</option>
+                    </select>
+                </div>
+                <div id="preciocurso">
+                    <label>Costo del curso:</label>
+                    <input type="number" name="costocurso" id="costocurso" tabindex="3">
+                    <p id="cerocosto">* El costo del curso no puede ser $0.</p>
+                    <p id="vaciocosto">* No puede dejar el costo del curso vac&iacute;o.</p>
                 </div>
             </div>
-
-            <div class="division" id="niveles"></div>
             <button type="submit" tabindex="5">Crear Curso</button>
         </form>
 

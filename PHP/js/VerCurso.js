@@ -40,6 +40,12 @@ function Mostrar(datos) {
         p.innerText = datos['descripcion']
         document.getElementById('mostrar').appendChild(p)
 
+        var btnAgregar = document.createElement('button')
+        btnAgregar.setAttribute('id', 'btnVerNiveles')
+        btnAgregar.setAttribute('class', 'azul')
+        btnAgregar.innerText = "Ver Niveles"
+        document.getElementById('mostrar').appendChild(btnAgregar)
+
         var divbtn = document.createElement('div')
         divbtn.setAttribute('class', 'botones')
         divbtn.setAttribute('id', 'botones')
@@ -103,6 +109,12 @@ $(document).ready(function () {
     $(document).on("click", "#btnEditar", function (e) {
         e.preventDefault()
         Editar()
+    });
+
+    $(document).on("click", "#btnVerNiveles", function (e) {
+        e.preventDefault()
+        var idcurso = sessionStorage.getItem("id_curso")
+        window.location.href = '../paginas/Niveles.php?curso=' + idcurso;
     });
 
     document.querySelector('#btnCancelar').addEventListener('click', function (e) {

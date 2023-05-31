@@ -17,40 +17,37 @@
     width: 100%;
 }
 
-#datos label {
+.division label,
+.division2 label {
+    width: 100%;
     padding: 0 0 0 10px;
     margin: 0;
 }
 
-#datos .division{
+.division {
     margin: 20px auto;
     display: block;
 }
 
-#datos .division2{
+.division2 {
+    width: 100%;
     margin: 20px auto;
     display: flex;
-    gap: 20px;
+    gap: 40px;
 }
-
-#datos .division2 div{
-    width: 50%;
+.division2 div{
+    width: 100%;
     margin: 0 auto;
-    display: block;
 }
 
-#datos .bloque{
-    display: flex;
-}
-
-.bloque div{
-    display: block;
-    margin: 0 10px;
+.costo label {
     width: 50%;
 }
 
-#datos input,
-#datos textarea {
+.division input,
+.division textarea,
+.division2 select,
+.division2 input {
     width: 100%;
     font-size: 16px;
     padding: 10px 0 10px 15px;
@@ -62,7 +59,7 @@
     margin: 5px 0;
 }
 
-#datos input:focus {
+.division input:focus, .division2 select:focus {
     border-color: blue;
     box-shadow: 0 1px 1px rgba(12, 22, 51, 0.075)inset, 0 0 8px rgba(7, 145, 230, 0.6);
     border-width: 1px;
@@ -101,7 +98,7 @@
     transform: scale(1.05);
 }
 
-#fotoperfil {
+#fotocurso {
     display: block;
     margin: 2% auto;
     width: 100%;

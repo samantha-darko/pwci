@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="es">
+<html lang="es-ES">
 <?php session_start();
 include_once '../php/UsuarioLoggeado.php'; ?>
 
@@ -9,24 +9,26 @@ include_once '../php/UsuarioLoggeado.php'; ?>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <script src="https://kit.fontawesome.com/854b826ed2.js" crossorigin="anonymous"></script>
-    <link rel="stylesheet" href="../boostrap/css/bootstrap.min.css">
     <script type="text/javascript" src="../boostrap/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="../boostrap/css/bootstrap.min.css">
 
     <link rel="stylesheet" href="../css/base.css">
-    <link rel="stylesheet" href="../css/VerCursos.css">
+    <link rel="stylesheet" href="../css/Niveles.css">
 
     <link rel="shortcut icon" href="../multmedia/logo.png" />
-    
-    <title>Mis Cursos | Maestro</title>
+    <title>Acerca del Curso | Jaiko</title>
 </head>
 
 <body>
+
     <?php echo $menu ?>
 
-    <div id="ventana-modal" class="modal"></div>
+    <div id="ventana-modal" class="modal">
+
+    </div>
 
     <div class="box-container" id="box-container">
-        <?php echo $cursos ?>
+        
     </div>
 
     <div class="box-footer">
@@ -37,7 +39,7 @@ include_once '../php/UsuarioLoggeado.php'; ?>
     </div>
 
     <script src="../js/jquery-3.6.0.min.js"></script>
-    <script src="../js/MisCursosMaestro.js"></script>
+    <script src="../js/Niveles.js"></script>
 </body>
 
 </html>

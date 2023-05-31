@@ -6,7 +6,6 @@ let guardar = document.querySelector("#guardar");
 let cancelar = document.querySelector("#cerrar");
 let registro = document.querySelector("#registro");
 let contra = document.querySelector("#contra")
-//let contrac = document.querySelector("#contrac")
 let nombre = document.querySelector("#nombre")
 let apellidop = document.querySelector("#apellidop")
 let apellidom = document.querySelector("#apellidom")
@@ -14,8 +13,6 @@ let fechanac = document.querySelector("#fechanac")
 let genero = document.querySelector("#genero")
 
 let vaciocontra = document.querySelector("#vaciocontra")
-//let vaciocontrac = document.querySelector("#vaciocontrac")
-//let errorcontrac = document.querySelector("#errorcontrac")
 let vacionombre = document.querySelector("#vacionombre")
 let vacioapellidop = document.querySelector("#vacioapellidop")
 let vacioapellidom = document.querySelector("#vacioapellidom")
@@ -85,13 +82,6 @@ function validarPassword(password) {
     } else {
         vaciocontra.style.display = "none"
     }
-    /*
-    if (password2.value.length < 1) {
-        error = true;
-        vaciocontrac.style.display = "block"
-    } else {
-        vaciocontrac.style.display = "none"
-    }*/
 
     if (!error) {
         var minimocar = false;
@@ -107,37 +97,27 @@ function validarPassword(password) {
         for (var i = 0; i < password.value.length; i++) {
             if (password.value.charCodeAt(i) >= 65 && password.value.charCodeAt(i) <= 90) {
                 mayuscula = true;
-            } else {
-
             }
             if (password.value.charCodeAt(i) >= 97 && password.value.charCodeAt(i) <= 122) {
                 minuscula = true;
 
-            } else {
-
             }
             if (password.value.charCodeAt(i) >= 48 && password.value.charCodeAt(i) <= 57) {
                 numero = true;
-            } else {
+            }
+            if ((password.value.charCodeAt(i) >= 35 && password.value.charCodeAt(i) <= 38)
+                || password.value.charCodeAt(i) == 33 || password.value.charCodeAt(i) == 42
+                || password.value.charCodeAt(i) == 43 || password.value.charCodeAt(i) == 46
+                || password.value.charCodeAt(i) == 47) {
                 caracter_raro = true;
             }
         }
         if (minimocar === true && mayuscula === true && minuscula === true && caracter_raro === true && numero === true) {
             errorletras.style.display = 'none';
-            //ERRORCONTRA = true;
-            /*if (contra.value !== contrac.value) {
-
-                errorcontrac.style.display = 'block';
-
-            } else {
-                errorcontrac.style.display = 'none';
-                return false;
-            }*/
 
         } else {
             errorletras.style.display = 'block';
             error = true;
-            //ERRORCONTRA = false;
         }
     }
 

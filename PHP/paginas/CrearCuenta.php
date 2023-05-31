@@ -23,24 +23,6 @@ include_once "..\php\UsuarioLoggeado.php"
 <body>
 
     <?php echo $menu ?>
-    <!--<div class="box-menu">
-        <nav id="menu-left">
-            <ul>
-                <li><a href="login.php"><img src="../multmedia/logo.png" tittle="Jaiko">Jaiko</a>
-
-                    <ul>
-                        <li><a href="construccion.php"><i class="fa fa-solid fa-circle-info"></i></i> Contactanos</a>
-                        </li>
-                        <li><a href="construccion.php"><i class="fa fa-solid fa-map-location-dot"></i></i> Ver
-                                Ubicación</a></li>
-                        <li><a href="construccion.php"><i class="fa fa-solid fa-address-card"></i></i> Acerca de
-                                Nosotros</a></li>
-                    </ul>
-
-                </li>
-            </ul>
-        </nav>
-    </div>-->
 
     <div id="ventana-modal" class="modal">
 
