@@ -2,7 +2,7 @@
 <html lang="es">
 <?php session_start();
 include_once '../php/UsuarioLoggeado.php'; 
-include_once '../php/MisCursos.php';?>
+include_once '../php/CursosAlumno.php'; ?>
 
 <head>
     <meta charset="UTF-8">
@@ -17,7 +17,7 @@ include_once '../php/MisCursos.php';?>
     <link rel="stylesheet" href="../css/VerCursos.css">
 
     <link rel="shortcut icon" href="../multmedia/logo.png" />
-
+    
     <title>Mis Cursos | Alumno</title>
 </head>
 
@@ -27,11 +27,7 @@ include_once '../php/MisCursos.php';?>
     <div id="ventana-modal" class="modal"></div>
 
     <div class="box-container" id="box-container">
-        <?php
-        $items = Paginar(3);
-        if ($items != '') {
-            echo $items;
-        } ?>
+        <?php echo $cursos ?>
     </div>
 
     <div class="box-footer">
@@ -42,7 +38,7 @@ include_once '../php/MisCursos.php';?>
     </div>
 
     <script src="../js/jquery-3.6.0.min.js"></script>
-    <script src="../js/VerCursos.js"></script>
+    <script src="../js/MisCursosAlumno.js"></script>
 </body>
 
 </html>

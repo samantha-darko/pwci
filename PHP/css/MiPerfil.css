@@ -258,7 +258,7 @@ textarea:focus {
 
 
 .datos button{
-    width: 60%;
+    width: 40%;
     margin: 5% 20%;
     padding: 10px 0;
     font-size: 14px;
@@ -277,7 +277,7 @@ textarea:focus {
     transform: scale(1.05);
 }
 
-#cerrar{
+#salir{
     background-color: #FF331F;
 }
 

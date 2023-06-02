@@ -22,7 +22,7 @@ if (isset($_SESSION['acceso'])) {
             $menu .= '<label>' . $datos->nombre . '</label></a>';
             $menu .= '<ul><li><a href="MiPerfil.php"><i class="fa fa-duotone fa-eye"></i> Mi Perfil</a></li>';
             $menu .= '<li><a href="MisCursos.php"><i class="fa-solid fa-circle-plus"></i> Mis Cursos</a></li>';
-            $menu .= '<li><a id="salir">';
+            $menu .= '<li><a href="" id="salir">';
             $menu .= '<i class="fa fa-sharp fa-solid fa-arrow-right-from-bracket"></i> Cerrar Sesión</a></li>';
             $menu .= '</ul></li></ul></nav>';
             $menu .= '<div class="buscador"><input type="search" name="" id="nav-search" placeholder="Buscador...">';

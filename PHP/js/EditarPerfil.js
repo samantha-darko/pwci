@@ -312,6 +312,7 @@ $(document).ready(function () {
         if ('rol' in sessionStorage) {
             sessionStorage.removeItem('rol');
         }
+        sessionStorage.clear()
         $.ajax({
             url: '../php/CerrarSesion.php',
             success: function (resultado) {
