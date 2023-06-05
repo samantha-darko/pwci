@@ -32,14 +32,13 @@
     display: none;
 }
 
-#btnAgregar{
+#btnAgregar,
+#btnEliminar {
     display: block;
-    width: 30%;
     margin: 5% auto;
     padding: 10px 0;
     font-size: 18px;
     border-radius: 5px;
-    background-color: #98CA3F;
     color: #F2F2F2;
     border-style: none;
     font-weight: bold;
@@ -49,7 +48,18 @@
     outline: 0 none;
 }
 
-#btnAgregar:hover {
+#btnAgregar {
+    background-color: #98CA3F;
+    width: 30%;
+}
+
+#btnEliminar {
+    background-color: #A9281D;
+    width: 15%;
+}
+
+#btnAgregar:hover,
+#btnEliminar:hover {
     transform: scale(1.05);
 }
 
@@ -82,4 +92,38 @@
     width: 60%;
     margin: 30px auto;
     border-radius: 2px;
+    text-align: center;
+}
+
+.contenido{
+    display: block;
+    margin: 40px auto;
+}
+
+.contenido p{
+    text-transform: uppercase;
+    font-weight: bold;
+    margin: 0 auto;
+}
+
+.contenido img{
+    display: block;
+    width: 40%;
+    border-radius: 2%;
+    object-fit: contain;
+    margin: 0 auto;
+}
+
+.paginacion {
+    display: block;
+    width: 100%;
+    margin: 20px auto;
+    text-align: center;
+}
+
+.paginacion a {
+    display: inline-block;
+    margin: 0 20px;
+    font-weight: bold;
+    font-size: 15px;
 }

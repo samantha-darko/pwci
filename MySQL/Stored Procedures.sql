@@ -125,9 +125,10 @@ begin
     if opcion =	'I' then
 		INSERT INTO nivel(id_curso_f, titulo, resumen, contenido, costo, video)
 		VALUES(sp_idcursof, sp_titulo, sp_resumen, sp_contenido, sp_costo, sp_video);
+        SELECT LAST_INSERT_ID() as idnivel, 1 as codigo, concat('registro exitoso') as mensaje;
 		
-		select 1 as codigo,
-		concat('registro exitoso') as mensaje;
+		#select 1 as codigo,
+		#concat('registro exitoso') as mensaje;
 	end if;
     
     if opcion = 'U' then    
@@ -316,7 +317,7 @@ DELIMITER ;
 DROP PROCEDURE IF EXISTS sp_consulta;
 DELIMITER $$
 CREATE DEFINER=`root`@`localhost` PROCEDURE `sp_consulta`(
-in sp_idusuario 	int,
+in sp_id		 	int,
 in sp_inicio		int,
 in sp_cantidad 		int,
 in opcion 			varchar(100)
@@ -326,13 +327,13 @@ begin
 	if opcion =	'ListadoMaestro' then
 		SELECT id_curso, id_usuario_f, titulo, descripcion, 
         activo, imagen, costo from curso 
-        where id_usuario_f = sp_idusuario
+        where id_usuario_f = sp_id
         LIMIT sp_inicio, sp_cantidad;
 	end if;
         
 	if opcion =	'TodosCursosMaestro' then
 		SELECT id_curso, id_usuario_f, titulo, descripcion, activo, imagen, costo from curso
-        where id_usuario_f = sp_idusuario;
+        where id_usuario_f = sp_id;
 	end if;
         
 	if opcion =	'LosMasVistos' then
@@ -343,5 +344,27 @@ begin
 		SELECT id_curso, id_usuario_f, titulo, descripcion, activo, imagen, costo from curso
         LIMIT sp_inicio, sp_cantidad;
 	end if;
+    
+    if opcion = 'TotalRecursos' then
+		SELECT id_recursos, id_nivel_f, nombre, tipo, contenido from recursos
+        where id_nivel_f = sp_id;
+    end if;
+    
+    if opcion = 'ListadoRecursos' then
+		SELECT id_recursos, id_nivel_f, nombre, tipo, contenido from recursos
+        where id_nivel_f = sp_id
+        LIMIT sp_inicio, sp_cantidad;
+    end if;
+    
+    if opcion = 'TotalNiveles' then
+		SELECT id_nivel, id_curso_f, titulo, resumen, contenido, costo, video, baja_logica from nivel
+        where id_curso_f = sp_id;
+    end if;
+    
+    if opcion = 'ListadoNiveles' then
+		SELECT id_nivel, id_curso_f, titulo, resumen, contenido, costo, video, baja_logica from nivel
+        where id_curso_f = sp_id
+        LIMIT sp_inicio, sp_cantidad;
+    end if;
 end$$
 DELIMITER ;

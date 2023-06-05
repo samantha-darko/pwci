@@ -1,7 +1,8 @@
 <!DOCTYPE html>
 <html lang="es-ES">
 <?php session_start();
-include_once '../php/UsuarioLoggeado.php'; ?>
+include_once '../php/UsuarioLoggeado.php';
+include_once '../php/ObtenerNiveles.php'; ?>
 
 <head>
     <meta charset="UTF-8">
@@ -46,12 +47,13 @@ include_once '../php/UsuarioLoggeado.php'; ?>
 
             <div class="division">
                 <label for="">Contenido del nivel:</label>
-                <input type="file" id="archivos" name="archivos" multiple tabindex="2">
+                <input type="file" id="archivos" name="archivos[]" multiple tabindex="2">
+                <p id="vacioarchivos">* Debe seleccionar al menos 1 archivo a subir.</p>
             </div>
 
             <div class="division">
                 <label>Costo del nivel:</label>
-                <input type="number" name="costo" id="costo" placeholder="0" tabindex="3">
+                <input type="number" name="costo" id="costo" placeholder="0.00" tabindex="3">
                 <p id="cerocosto">* El costo del nivel no puede ser $0.</p>
                 <p id="vaciocosto">* No puede dejar el costo del nivel vac&iacute;o.</p>
             </div>
@@ -60,26 +62,12 @@ include_once '../php/UsuarioLoggeado.php'; ?>
 
         </form>
 
-        <div class="niveles">
-            <div class="bloquefoto">
-                <img class="usuarioFoto" id="foto" name="foto" src="" />
-                <label for="">Imagen del curso</label>
-            </div>
-            <div class="division">
-                <label>Título</label>
-                <h2 id="tittle" name="tittle"></h2>
-            </div>
-            <div class="division">
-                <label>Descripción</label>
-                <h3 id="description" name="description">
-                    </h2>
-            </div>
-            <div class="division">
-                <label>Precio curso</label>
-                <h3 id="price" name="price">
-                    </h2>
-            </div>
-        </div>
+        <?php
+        $items = Paginar();
+        if ($items != '') {
+            echo $items;
+        } ?>
+
 
     </div>
 

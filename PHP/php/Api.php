@@ -170,6 +170,80 @@ class ApiCliente
     }
 }
 
+class ApiNivel
+{
+    public function Agregar($datos)
+    {
+        try {
+            $msj = false;
+            $db = new DB();
+            $conn = $db->connect();
+
+            $sql = ("call sp_nivel(0, ?, ?, ?, ?, ?, ?, 'I')");
+            $stmt = $conn->prepare($sql);
+
+            $stmt->bindValue(1, $datos->id_curso_f);
+            $stmt->bindValue(2, $datos->titulo);
+            $stmt->bindValue(3, $datos->resumen);
+            $stmt->bindValue(4, $datos->contenido);
+            $stmt->bindValue(5, $datos->costo);
+            $stmt->bindValue(6, $datos->video);
+
+            $stmt->execute();
+
+            if ($stmt->rowCount() > 0) {
+                $row = $stmt->fetch();
+                $msj = array($row['idnivel'], $row['codigo'], $row['mensaje']);
+            }
+            return $msj;
+        } catch (PDOException $e) {
+            $msj = "Error en servidor: " . $e->getMessage();
+            return $msj;
+        }
+    }
+
+    public function TotalNiveles($id)
+    {
+        try {
+            $db = new DB();
+            $conn = $db->connect();
+            $sql = ("call sp_consulta(?, '', '', 'TotalNiveles');");
+            $stmt = $conn->prepare($sql);
+
+            $stmt->bindValue(1, $id);
+
+            $stmt->execute();
+            $result = $stmt->fetchAll((PDO::FETCH_ASSOC));
+
+            return $result;
+        } catch (PDOException $e) {
+            $result = "Error en servidor: " . $e->getMessage();
+            return $result;
+        }
+    }
+
+    function ListadoNiveles($id, $inicio, $registros)
+    {
+        try {
+            $db = new DB();
+            $conn = $db->connect();
+            $sql = ("call sp_consulta(?, ?, ?, 'ListadoNiveles');");
+            $stmt = $conn->prepare($sql);
+
+            $stmt->bindValue(1, $id);
+            $stmt->bindValue(2, $inicio);
+            $stmt->bindValue(3, $registros);
+
+            $stmt->execute();
+
+            return $stmt;
+        } catch (PDOException $e) {
+            $stmt = "Error en servidor: " . $e->getMessage();
+            return $stmt;
+        }
+    }
+}
+
 class ApiCurso
 {
     public function Agregar($datos)

@@ -76,4 +76,34 @@ class Curso
     }
 }
 
-?>
+class Nivel
+{
+    public $id_nivel;
+    public $id_curso_f;
+    public $titulo;
+    public $resumen;
+    public $contenido;
+    public $costo;
+    public $video;
+    public $baja_logica;
+
+    public function __construct(
+        $id_nivel,
+        $id_curso_f,
+        $titulo,
+        $resumen,
+        $contenido,
+        $costo,
+        $video,
+        $baja_logica
+    ) {
+        $this->id_nivel = $id_nivel;
+        $this->id_curso_f = $id_curso_f;
+        $this->titulo = $titulo;
+        $this->resumen = $resumen;
+        $this->contenido = $contenido;
+        $this->costo = $costo;
+        $this->video = $video;
+        $this->baja_logica = $baja_logica;
+    }
+}
