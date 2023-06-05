@@ -10,7 +10,10 @@ class ApiCliente
         try {
             $db = new DB();
             $conn = $db->connect();
-
+            if (is_array($conn)) {
+                $msj = $conn['error'];
+                return $msj;
+            }
             $sql = ("call sp_usuario(?, ?, ?, ?, ?, ?, ?, ?, ?, 'I');");
             $stmt = $conn->prepare($sql);
 
@@ -42,7 +45,10 @@ class ApiCliente
             $msj = '';
             $db = new DB();
             $conn = $db->connect();
-
+            if (is_array($conn)) {
+                $msj = $conn['error'];
+                return $msj;
+            }
             $sql = ("call sp_usuario(?, ?, ?, ?, ?, ?, ?, ?, ?, 'U');");
             $stmt = $conn->prepare($sql);
 
@@ -75,6 +81,10 @@ class ApiCliente
         try {
             $db = new DB();
             $conn = $db->connect();
+            if (is_array($conn)) {
+                $msj = $conn['error'];
+                return $msj;
+            }
             $sql = '';
             $sql = ("call sp_usuario_inicio_sesion(?, ?);");
             $stmt = $conn->prepare($sql);
@@ -121,6 +131,10 @@ class ApiCliente
         try {
             $db = new DB();
             $conn = $db->connect();
+            if (is_array($conn)) {
+                $msj = $conn['error'];
+                return $msj;
+            }
             $sql = '';
             $sql = ("call sp_inscribir_curso(0,?,?,0,0,'I');");
             $stmt = $conn->prepare($sql);
@@ -149,6 +163,10 @@ class ApiCliente
     {
         $db = new DB();
         $conn = $db->connect();
+        if (is_array($conn)) {
+            $msj = $conn['error'];
+            return $msj;
+        }
         $sql = ("SELECT id_curso, id_usuario_f, titulo, descripcion, 
         activo, imagen, costo from curso_inscrito");
         $stmt = $conn->prepare($sql);
@@ -162,6 +180,10 @@ class ApiCliente
     {
         $db = new DB();
         $conn = $db->connect();
+        if (is_array($conn)) {
+            $msj = $conn['error'];
+            return $msj;
+        }
         $sql = ("SELECT id_curso, id_usuario_f, titulo, descripcion, 
         activo, imagen, costo from curso_inscrito LIMIT $inicio,$registros");
         $stmt = $conn->prepare($sql);
@@ -178,7 +200,10 @@ class ApiNivel
             $msj = false;
             $db = new DB();
             $conn = $db->connect();
-
+            if (is_array($conn)) {
+                $msj = $conn['error'];
+                return $msj;
+            }
             $sql = ("call sp_nivel(0, ?, ?, ?, ?, ?, ?, 'I')");
             $stmt = $conn->prepare($sql);
 
@@ -207,6 +232,10 @@ class ApiNivel
         try {
             $db = new DB();
             $conn = $db->connect();
+            if (is_array($conn)) {
+                $msj = $conn['error'];
+                return $msj;
+            }
             $sql = ("call sp_consulta(?, '', '', 'TotalNiveles');");
             $stmt = $conn->prepare($sql);
 
@@ -227,6 +256,10 @@ class ApiNivel
         try {
             $db = new DB();
             $conn = $db->connect();
+            if (is_array($conn)) {
+                $msj = $conn['error'];
+                return $msj;
+            }
             $sql = ("call sp_consulta(?, ?, ?, 'ListadoNiveles');");
             $stmt = $conn->prepare($sql);
 
@@ -252,7 +285,10 @@ class ApiCurso
             $msj = false;
             $db = new DB();
             $conn = $db->connect();
-
+            if (is_array($conn)) {
+                $msj = $conn['error'];
+                return $msj;
+            }
             $sql = ("call sp_curso(0, ?, ?, ?, ?, ?, 'I');");
             $stmt = $conn->prepare($sql);
 
@@ -279,7 +315,10 @@ class ApiCurso
             $msj = '';
             $db = new DB();
             $conn = $db->connect();
-
+            if (is_array($conn)) {
+                $msj = $conn['error'];
+                return $msj;
+            }
             $sql = ("call sp_curso(?, ?, ?, ?, ?, ?, 'U');");
             $stmt = $conn->prepare($sql);
 
@@ -306,7 +345,10 @@ class ApiCurso
         try {
             $db = new DB();
             $conn = $db->connect();
-
+            if (is_array($conn)) {
+                $msj = $conn['error'];
+                return $msj;
+            }
             $sql = ("select id_curso, id_usuario_f, titulo, descripcion, 
             activo, imagen, costo from curso where id_curso = ? and id_usuario_f = ?;");
             $stmt = $conn->prepare($sql);
@@ -338,6 +380,10 @@ class ApiCurso
         try {
             $db = new DB();
             $conn = $db->connect();
+            if (is_array($conn)) {
+                $msj = $conn['error'];
+                return $msj;
+            }
             $sql = ("call sp_consulta('', '', '', 'LosMasVistos');");
             $stmt = $conn->prepare($sql);
 
@@ -356,6 +402,10 @@ class ApiCurso
         try {
             $db = new DB();
             $conn = $db->connect();
+            if (is_array($conn)) {
+                $msj = $conn['error'];
+                return $msj;
+            }
             $sql = ("call sp_consulta('', ?, ?, 'ListadoLosMasVistos');");
             $stmt = $conn->prepare($sql);
 
@@ -376,6 +426,10 @@ class ApiCurso
         try {
             $db = new DB();
             $conn = $db->connect();
+            if (is_array($conn)) {
+                $msj = $conn['error'];
+                return $msj;
+            }
             $sql = ("call sp_consulta(?, ?, ?, 'ListadoMaestro');");
             $stmt = $conn->prepare($sql);
 
@@ -397,6 +451,10 @@ class ApiCurso
         try {
             $db = new DB();
             $conn = $db->connect();
+            if (is_array($conn)) {
+                $msj = $conn['error'];
+                return $msj;
+            }
             $sql = ("call sp_consulta(?, '', '', 'TodosCursosMaestro');");
             $stmt = $conn->prepare($sql);
 

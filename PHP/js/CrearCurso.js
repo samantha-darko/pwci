@@ -19,7 +19,7 @@ let vaciocosto = document.querySelector("#vaciocosto");
 let tipo = document.querySelector("#tipo");
 
 function Agregar(datos) {
-
+    console.log(datos)
     if (datos[0] === 1) {
         document.getElementById("ventana-modal").style.display = "block"
         $(".modal").append("<div class='contenido-modal'> <a href='login.php'><img src='../multmedia/logo.png' titlle='Inicio'></a>" +

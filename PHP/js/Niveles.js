@@ -57,6 +57,27 @@ document.addEventListener("DOMContentLoaded", ValidarSesion)
 
 $(document).ready(function () {
 
+    document.querySelector('#salir').addEventListener('click', function (e) {
+        e.preventDefault();
+        if ('idusuario' in sessionStorage) {
+            sessionStorage.removeItem('idusuario');
+        }
+        if ('rol' in sessionStorage) {
+            sessionStorage.removeItem('rol');
+        }
+        sessionStorage.clear()
+        $.ajax({
+            url: '../php/CerrarSesion.php',
+            success: function (resultado) {
+                var res = JSON.parse(resultado)
+                console.log(res)
+                if (res) {
+                    window.location.href = '../paginas/IniciarSesion.php'
+                }
+            }
+        })
+    })
+
     titulo.addEventListener("focus", function (e) {
         e.preventDefault();
         Enfocar(titulo)
@@ -147,6 +168,7 @@ $(document).ready(function () {
                 contentType: false,
                 success: function (response) {
                     let datos = JSON.parse(response)
+                    console.log(datos)
                     if (datos[1] === 1) {
                         document.getElementById("ventana-modal").style.display = "block"
                         $(".modal").append("<div class='contenido-modal'> <a href='login.php'><img src='../multmedia/logo.png' titlle='Inicio'></a>" +

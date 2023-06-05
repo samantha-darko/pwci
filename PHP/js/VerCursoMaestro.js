@@ -156,6 +156,7 @@ $(document).ready(function () {
             url: '../php/CerrarSesion.php',
             success: function (resultado) {
                 var res = JSON.parse(resultado)
+                console.log(res)
                 if (res) {
                     window.location.href = '../paginas/IniciarSesion.php'
                 }

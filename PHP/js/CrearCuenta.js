@@ -383,6 +383,7 @@ $(document).ready(function () {
                 data: new FormData(this),
                 success: function (resultado) {
                     let res = JSON.parse(resultado);
+                    console.log(res)
                     if (res[0] === 1) {
                         document.querySelector("#ventana-modal").style.display = "block";
                         $(".modal").append("<div class='contenido-modal'><i class='fa-sharp fa-solid fa-circle-check'></i>" +

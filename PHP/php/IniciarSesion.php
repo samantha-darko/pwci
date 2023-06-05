@@ -11,13 +11,7 @@ try {
     /*$tipo = $_POST["rol"];*/
     $correo = $_POST["correo"];
     $contra = $_POST["contra"];
-
-    /*
-    if ($tipo == 'alumno') {
-        $_SESSION['tipo'] = "alumno";
-    } else if ($tipo == 'maestro') {
-        $_SESSION['tipo'] = "maestro";
-    }*/
+    
     $datos = $api->IniciarSesion($correo, $contra);
     if (is_array ($datos)) {
         $msj = array("valido",$datos['rol'],$datos['id_usuario']);

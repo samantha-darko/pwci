@@ -25,8 +25,9 @@
             return $pdo;
 
         }catch(PDOException $e){
-            print_r('Error connection: ' . $e->getMessage());
+            $msj = array("error" => $e->getMessage());
+            //('Error connection: ' . $e->getMessage());
+            return $msj;
         }
     }
     }
-?>
