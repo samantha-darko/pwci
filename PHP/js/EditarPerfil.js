@@ -332,16 +332,13 @@ $(document).ready(function () {
         eapellidop = validarNombre(apellidop, vacioapellidop)
         eapellidom = validarNombre(apellidom, vacioapellidom)
         if (document.querySelector("#fotoperfil").style.display == '') {
-            //document.querySelector("#vaciofoto").style.display = 'block'
             efoto = true
-        }/* else {
-            document.querySelector("#vaciofoto").style.display = 'none'
-        }*/
+        }
 
         if (econtra || enombre || eapellidop || eapellidom) {
             document.querySelector("#ventana-alertas").style.display = "block";
             $(".modal").append("<div class='contenido-modal'><i class='fa-sharp fa-solid fa-circle-xmark'></i>" +
-                "<div class='aviso-modal'><p>Verifique sus datos</p> <h2>No se pudo realizar el registro</h2></div></div>");
+                "<div class='aviso-modal'><p>Verifique sus datos</p> <h2>No se pudieron actualizar los datos.</h2></div></div>");
             setTimeout(function () {
                 $(".contenido-modal").remove();
                 document.querySelector("#ventana-alertas").style.display = "none";
@@ -360,7 +357,7 @@ $(document).ready(function () {
                     if (res) {
                         document.querySelector("#ventana-alertas").style.display = "block";
                         $(".modal").append("<div class='contenido-modal'><i class='fa-sharp fa-solid fa-circle-check'></i>" +
-                            "<div class='aviso-modal'><p>Registrarse</p> <h2>Se han actualizado los datos correctamente</h2></div></div>");
+                            "<div class='aviso-modal'><p>Editar Perfil</p> <h2>Se han actualizado los datos correctamente</h2></div></div>");
                         setTimeout(function () {
                             $(".contenido-modal").remove();
                             document.querySelector("#ventana-alertas").style.display = "none";

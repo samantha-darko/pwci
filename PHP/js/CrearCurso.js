@@ -11,7 +11,8 @@ let vaciodescripcion = document.querySelector("#vaciodescripcion");
 let fotocurso = document.querySelector("#fotocurso");
 let vaciofoto = document.querySelector("#vaciofoto");
 
-let costocurso = document.querySelector("#preciocurso");
+let preciocurso = document.querySelector("#preciocurso");
+let costocurso = document.querySelector("#costocurso");
 let cerocosto = document.querySelector("#cerocosto");
 let vaciocosto = document.querySelector("#vaciocosto");
 
@@ -123,6 +124,16 @@ function Desenfocar(objeto, objeto2) {
     }
 }
 
+function VerificarSesion() {
+    if (!("idusuario" in sessionStorage)) {
+        window.location.href = "../paginas/IniciarSesion.php"
+    }
+    document.querySelector("#costocurso").value = "0"
+    document.querySelector("#preciocurso").style.display = "block"
+}
+
+document.addEventListener("DOMContentLoaded", VerificarSesion)
+
 $(document).ready(function () {
     if ('cantidadlvl' in sessionStorage) {
         sessionStorage.removeItem('cantidadlvl');
@@ -134,7 +145,11 @@ $(document).ready(function () {
 
     datos.addEventListener("submit", function (e) {
         e.preventDefault();
-        if (titulo.value.length > 4 && descripcion.value.length > 9 && costocurso.value.length > 0 && fotocurso.style.display != '') {
+        costoc = true;
+        if (preciocurso.style.display == 'block' && costocurso.value === '0') {
+            costoc = false;
+        }
+        if (titulo.value.length > 4 && descripcion.value.length > 9 && fotocurso.style.display != '' && costoc) {
             $.ajax({
                 type: "POST",
                 url: "../php/AgregarCurso.php",
@@ -164,17 +179,17 @@ $(document).ready(function () {
                 cortodescripcion.style.display = 'block'
             }
 
-            if (costocurso.style.display == 'block') {
+            if (preciocurso.style.display == 'block') {
                 if (costocurso.value.length == 0) {
                     costocurso.style.borderColor = '#FF331F'
                     vaciocosto.style.display = 'block'
-                } else if (costocurso.value == 0) {
+                } else if (costocurso.value == '0') {
                     costocurso.style.borderColor = '#FF331F'
                     cerocosto.style.display = 'block'
                 }
             }
 
-            if (fotoperfil.style.display == '') {
+            if (fotocurso.style.display == '') {
                 vaciofoto.style.display = 'block'
             }
             document.querySelector("#ventana-modal").style.display = "block";
@@ -215,11 +230,11 @@ $(document).ready(function () {
         e.preventDefault();
         tipo.style.boxShadow = 'none'
         if (tipo.value == "curso") {
-            costocurso.style.display = 'block'
+            preciocurso.style.display = 'block'
             costocurso.value = ""
         }
         if (tipo.value == "nivel") {
-            costocurso.style.display = 'none'
+            preciocurso.style.display = 'none'
             costocurso.value = "0.00"
             costocurso.style.borderColor = 'gray'
             cerocosto.style.display = 'none'
@@ -232,7 +247,7 @@ $(document).ready(function () {
     })
     costocurso.addEventListener("blur", function (e) {
         e.preventDefault();
-        if (costocurso.style.display == 'block') {
+        if (preciocurso.style.display == 'block') {
             Desenfocar(costocurso, vaciocosto)
             costocurso.style.boxShadow = 'none'
             cerocosto.style.display = 'none'

@@ -24,46 +24,6 @@ include_once '../php/UsuarioLoggeado.php'; ?>
 <body onload="VerificarSesion();">
 
     <?php echo $menu ?>
-    <!--<div class="box-menu">
-        <nav id="menu-left">
-            <ul>
-                <li><a href="PaginaPrincipal.php"><img src="../multmedia/logo.png" tittle="Jaiko">Jaiko</a>
-
-                    <ul>
-                        <li><a href="construccion.php"><i class="fa fa-solid fa-circle-info"></i></i> Contactanos</a>
-                        </li>
-                        <li><a href="construccion.php"><i class="fa fa-solid fa-map-location-dot"></i></i> Ver
-                                Ubicación</a></li>
-                        <li><a href="construccion.php"><i class="fa fa-solid fa-address-card"></i></i> Acerca de
-                                Nosotros</a></li>
-                    </ul>
-
-                </li>
-            </ul>
-        </nav>
-
-        <nav id="menu-right">
-            <ul>
-                <li>
-                    <a href="">
-                        <?php //echo '<img src="data:png;base64,' . base64_encode($datos->imagen) . '"/>'; ?>
-                        <?php //echo '<label>' . $datos->nombre . '</label>'; ?>
-                    </a>
-                    <ul>
-                        <li><a href="MiPerfil.php"><i class="fa fa-duotone fa-eye"></i> Mi Perfil</a></li>
-                        <li><a href="MisCursos.php"><i class="fa-solid fa-circle-plus"></i> Mis Cursos</a></li>
-                        <li><a href="../php/CerrarSesion.php">
-                                <i class="fa fa-sharp fa-solid fa-arrow-right-from-bracket"></i> Cerrar Sesión</a></li>
-                    </ul>
-                </li>
-            </ul>
-        </nav>
-
-        <div class="buscador">
-            <input type="search" name="" id="nav-search" placeholder="Buscador...">
-            <button id="btn-search"><i class="fa fa-solid fa-magnifying-glass"></i></button>
-        </div>
-    </div>-->
 
     <div id="ventana-alertas" class="modal"></div>
 
@@ -153,7 +113,7 @@ include_once '../php/UsuarioLoggeado.php'; ?>
 
                 <div class="datos">
                     <button id="guardar">Guardar Cambios</button>
-                    <button id="cerrar" onclick="location.href='../paginas/MiPerfil.php';">Cancelar</button>
+                    <button id="cancelar" onclick="location.href='../paginas/MiPerfil.php';">Cancelar</button>
                 </div>
             </form>
 

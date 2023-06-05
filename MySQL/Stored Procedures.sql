@@ -106,18 +106,60 @@ begin
 end$$
 DELIMITER ;
 
-# call sp_usuario_inicio_sesion('jairfurry@gmail.com', 'holaa');
-# select * from usuario;
-# update usuario set errores = 0 where id_usuario = 261305;
+###------------ NIVEL ------------###
+DROP PROCEDURE IF EXISTS sp_nivel;
+DELIMITER $$
+CREATE DEFINER=`root`@`localhost` PROCEDURE `sp_nivel`(
+in sp_idnivel 		int,
+in sp_idcursof		int,
+in sp_titulo 		varchar(64),
+in sp_resumen 		varchar(300),
+in sp_contenido 	varchar(2000),
+in sp_costo		 	decimal(15, 2),
+in sp_video			longblob,
+in opcion 			varchar(100)
+)
+SQL SECURITY INVOKER
+begin
+	
+    if opcion =	'I' then
+		INSERT INTO nivel(id_curso_f, titulo, resumen, contenido, costo, video)
+		VALUES(sp_idcursof, sp_titulo, sp_resumen, sp_contenido, sp_costo, sp_video);
+		
+		select 1 as codigo,
+		concat('registro exitoso') as mensaje;
+	end if;
+    
+    if opcion = 'U' then    
+		update nivel set
+		id_curso_f = if(sp_idcursof <> '', sp_idcursof, id_curso_f),
+		titulo = if(sp_titulo <> '', sp_titulo, titulo),
+		resumen = if(sp_resumen <> '', sp_resumen, resumen),
+		contenido = if(sp_contenido <> '', sp_contenido, contenido),
+		costo = if(sp_costo <> '', sp_costo, costo),
+		video = if(sp_video <> '', sp_video, video)
+		where id_nivel = sp_idnivel;
+    
+		select 1 as codigo,
+		concat('Nivel modificado exitosamente') as mensaje;
+	end if;
+    
+     if opcion = 'D' then 
+		update nivel set baja_logica = 1 
+        where id_nivel = sp_idnivel;
+        select 1 as codigo, 
+        'Baja exitosa' as mensaje;
+    end if;
+    
+end$$
+DELIMITER ;
 
 
-###----------------------------------ALTAS BAJAS Y CAMBIOS CATEGORIA
-
-
+###----ALTAS BAJAS Y CAMBIOS CATEGORIA----###
 DROP PROCEDURE IF EXISTS sp_categoria;
 DELIMITER $$
 CREATE DEFINER=`root`@`localhost` PROCEDURE `sp_categoria`(
-in	sp_id_categirua					int,
+in	sp_id_categoria					int,
 in	sp_id_usuario_f 				int,
 in	sp_titulo 						varchar(64),
 in	sp_descripcion 					varchar(500),
@@ -163,17 +205,17 @@ begin
 end$$
 DELIMITER ;
 
-###----------------------------------ALTAS BAJAS Y CAMBIOS CURSO #
+###-------- ALTAS BAJAS, CAMBIOS CONSULTAS CURSO --------#
 DROP PROCEDURE IF EXISTS sp_curso;
 DELIMITER $$
 CREATE DEFINER=`root`@`localhost` PROCEDURE `sp_curso`(
 in	sp_id_curso				int,
 in  sp_id_usuario_f			int,
-in	sp_titulo					varchar(64),
-in	sp_descripcion				varchar(500),
-in  sp_imagen					longblob,
-in  sp_costo					decimal(15, 2),
-in	opcion					varchar(2)
+in	sp_titulo				varchar(64),
+in	sp_descripcion			varchar(500),
+in  sp_imagen				longblob,
+in  sp_costo				decimal(15, 2),
+in	opcion					varchar(20)
 )
 SQL SECURITY INVOKER
 begin
@@ -184,8 +226,8 @@ begin
         
 	DECLARE EXIT HANDLER FOR SQLEXCEPTION 
 		SELECT 100 as codigo,
-       'Error en base de datos' as Message; 
-
+       'Error en base de datos' as Message;
+       
 	if opcion =	'I' then
 		INSERT INTO curso(id_usuario_f, titulo, descripcion, imagen, costo)
 		VALUES(sp_id_usuario_f, sp_titulo, sp_descripcion, sp_imagen, sp_costo);
@@ -194,18 +236,16 @@ begin
 		concat('registro exitoso') as mensaje;
 	end if;
     
-	if opcion = 'U' then
-    
-    update curso set
-    titulo = if(sp_titulo <> '', sp_titulo, titulo),
-    descripcion = if(sp_descripcion <> '', sp_descripcion, descripcion),
-    imagen = if(sp_imagen <> '', sp_imagen, imagen),
-    costo = if(sp_costo <> '', sp_costo, costo)
-    where id_curso = sp_id_curso
-    ;
-    
-     select 1 as codigo,
-    concat('Categoria modificado exitosamente') as mensaje;
+	if opcion = 'U' then    
+		update curso set
+		titulo = if(sp_titulo <> '', sp_titulo, titulo),
+		descripcion = if(sp_descripcion <> '', sp_descripcion, descripcion),
+		imagen = if(sp_imagen <> '', sp_imagen, imagen),
+		costo = if(sp_costo <> '', sp_costo, costo)
+		where id_curso = sp_id_curso;
+		
+		select 1 as codigo,
+		concat('Curso modificado exitosamente') as mensaje;
     end if;
     
      if opcion = 'D' then 
@@ -269,5 +309,39 @@ begin
         select 1 as codigo, 
         'Baja exitosa' as mensaje;
     end if;
+end$$
+DELIMITER ;
+
+###------------ CONSULTAS ------------###
+DROP PROCEDURE IF EXISTS sp_consulta;
+DELIMITER $$
+CREATE DEFINER=`root`@`localhost` PROCEDURE `sp_consulta`(
+in sp_idusuario 	int,
+in sp_inicio		int,
+in sp_cantidad 		int,
+in opcion 			varchar(100)
+)
+SQL SECURITY INVOKER
+begin
+	if opcion =	'ListadoMaestro' then
+		SELECT id_curso, id_usuario_f, titulo, descripcion, 
+        activo, imagen, costo from curso 
+        where id_usuario_f = sp_idusuario
+        LIMIT sp_inicio, sp_cantidad;
+	end if;
+        
+	if opcion =	'TodosCursosMaestro' then
+		SELECT id_curso, id_usuario_f, titulo, descripcion, activo, imagen, costo from curso
+        where id_usuario_f = sp_idusuario;
+	end if;
+        
+	if opcion =	'LosMasVistos' then
+		SELECT id_curso, id_usuario_f, titulo, descripcion, activo, imagen, costo from curso LIMIT 10;
+	end if;
+    
+    if opcion =	'ListadoLosMasVistos' then
+		SELECT id_curso, id_usuario_f, titulo, descripcion, activo, imagen, costo from curso
+        LIMIT sp_inicio, sp_cantidad;
+	end if;
 end$$
 DELIMITER ;

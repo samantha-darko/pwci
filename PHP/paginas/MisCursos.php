@@ -38,7 +38,7 @@ include_once '../php/CursosAlumno.php'; ?>
     </div>
 
     <script src="../js/jquery-3.6.0.min.js"></script>
-    <script src="../js/MisCursosAlumno.js"></script>
+    <script src="../js/MisCursos.js"></script>
 </body>
 
 </html>

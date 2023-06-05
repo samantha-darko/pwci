@@ -1,8 +1,8 @@
 <!DOCTYPE html>
 <html lang="es-ES">
 <?php session_start();
-include_once '../php/UsuarioLoggeado.php'; 
-include_once '../php/Cursos.php'; 
+include_once '../php/UsuarioLoggeado.php';
+include_once '../php/Cursos.php';
 ?>
 
 <head>
@@ -31,55 +31,15 @@ include_once '../php/Cursos.php';
 
     <div class="box-container" id="box-container">
 
-        <div id="carouselExampleDark" class="carousel carousel-dark slide" data-bs-ride="carousel">
-            <div class="carousel-indicators">
-                <button type="button" data-bs-target="#carouselExampleDark" data-bs-slide-to="0" class="active"
-                    aria-current="true" aria-label="Slide 1"></button>
-                <button type="button" data-bs-target="#carouselExampleDark" data-bs-slide-to="1"
-                    aria-label="Slide 2"></button>
-                <button type="button" data-bs-target="#carouselExampleDark" data-bs-slide-to="2"
-                    aria-label="Slide 3"></button>
-            </div>
-            <div class="carousel-inner">
-                <div class="carousel-item active" data-bs-interval="10000">
-                    <img src="../multmedia/curso1.webp" class="d-block w-100" alt="...">
-                    <!--<div class="carousel-caption d-none d-md-block">
-                        <h5>Etiqueta de la primera diapositiva</h5>
-                        <p>Algún contenido placeholder representativo para la primera diapositiva.</p>
-                    </div>-->
-                </div>
-                <div class="carousel-item" data-bs-interval="2000">
-                    <img src="../multmedia/curso2.jpg" class="d-block w-100" alt="...">
-                    <!--<div class="carousel-caption d-none d-md-block">
-                        <h5>Etiqueta de la segunda diapositiva</h5>
-                        <p>Algún contenido placeholder representativo para la segunda diapositiva.</p>
-                    </div>-->
-                </div>
-                <div class="carousel-item">
-                    <img src="../multmedia/curso1.webp" class="d-block w-100" alt="...">
-                    <!--<div class="carousel-caption d-none d-md-block">
-                        <h5>Etiqueta de la tercera diapositiva</h5>
-                        <p>Algún contenido placeholder representativo para la tercera diapositiva.</p>
-                    </div>-->
-                </div>
-            </div>
-            <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleDark"
-                data-bs-slide="prev">
-                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                <span class="visually-hidden">Anterior</span>
-            </button>
-            <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleDark"
-                data-bs-slide="next">
-                <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                <span class="visually-hidden">Siguiente</span>
-            </button>
+        <div class="losmasvistos">
+            <h1>Los más vistos</h1>
+            <?php
+            $items = Paginar(4);
+            if ($items != '') {
+                echo $items;
+            } ?>
         </div>
 
-        <?php
-        $items = Paginar(3);
-        if ($items != '') {
-            echo $items;
-        } ?>
 
     </div>
 

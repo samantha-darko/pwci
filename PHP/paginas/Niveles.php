@@ -28,7 +28,59 @@ include_once '../php/UsuarioLoggeado.php'; ?>
     </div>
 
     <div class="box-container" id="box-container">
-        
+
+        <form id="agregar" class="agregar" enctype="multipart/form-data">
+            <div class="division">
+                <label>Título</label>
+                <input id="titulo" name="titulo" type="text" onkeypress="return Letters(event);" tabindex="0">
+                <p id="cortotitulo">* El t&iacute;tulo es muy corto.</p>
+                <p id="vaciotitulo">* No puede dejar el t&iacute;tulo vac&iacute;o.</p>
+            </div>
+
+            <div class="division">
+                <label>Resumen</label>
+                <textarea id="resumen" name="resumen" onkeypress="return Letters(event);" tabindex="1"></textarea>
+                <p id="cortoresumen">* La descripci&oacute;n es muy corta.</p>
+                <p id="vacioresumen">* No puede dejar la descripci&oacute;n vac&iacute;a.</p>
+            </div>
+
+            <div class="division">
+                <label for="">Contenido del nivel:</label>
+                <input type="file" id="archivos" name="archivos" multiple tabindex="2">
+            </div>
+
+            <div class="division">
+                <label>Costo del nivel:</label>
+                <input type="number" name="costo" id="costo" placeholder="0" tabindex="3">
+                <p id="cerocosto">* El costo del nivel no puede ser $0.</p>
+                <p id="vaciocosto">* No puede dejar el costo del nivel vac&iacute;o.</p>
+            </div>
+
+            <button id="btnAgregar" type="submit" tabindex="4">Agregar</button>
+
+        </form>
+
+        <div class="niveles">
+            <div class="bloquefoto">
+                <img class="usuarioFoto" id="foto" name="foto" src="" />
+                <label for="">Imagen del curso</label>
+            </div>
+            <div class="division">
+                <label>Título</label>
+                <h2 id="tittle" name="tittle"></h2>
+            </div>
+            <div class="division">
+                <label>Descripción</label>
+                <h3 id="description" name="description">
+                    </h2>
+            </div>
+            <div class="division">
+                <label>Precio curso</label>
+                <h3 id="price" name="price">
+                    </h2>
+            </div>
+        </div>
+
     </div>
 
     <div class="box-footer">

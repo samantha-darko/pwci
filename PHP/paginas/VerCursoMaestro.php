@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="es-ES">
 <?php session_start();
-include_once "..\php\UsuarioLoggeado.php"
+include_once "..\php\UsuarioLoggeado.php";
 ?>
 
 <head>
@@ -14,7 +14,7 @@ include_once "..\php\UsuarioLoggeado.php"
     <link rel="stylesheet" href="../boostrap/css/bootstrap.min.css">
 
     <link rel="stylesheet" href="../css/base.css">
-    <link rel="stylesheet" href="../css/CrearCurso.css">
+    <link rel="stylesheet" href="../css/VerCursoMaestro.css">
 
     <link rel="shortcut icon" href="../multmedia/logo.png" />
     <title>Agregar Curso - Jaiko</title>
@@ -30,7 +30,38 @@ include_once "..\php\UsuarioLoggeado.php"
 
     <div class="box-container" id="box-container">
         <h1>Datos del Curso</h1>
+        <div id="info" class="info">
+            <div class="bloquefoto">
+                <img class="usuarioFoto" id="foto" name="foto" src="" />
+                <label for="">Imagen del curso</label>
+            </div>
+            <div class="division">
+                <label>Título</label>
+                <h2 id="tittle" name="tittle"></h2>
+            </div>
+            <div class="division">
+                <label>Descripción</label>
+                <h3 id="description" name="description">
+                    </h2>
+            </div>
+            <div class="division">
+                <label>Precio curso</label>
+                <h3 id="price" name="price">
+                    </h2>
+            </div>
+
+            <div class="division">
+                <button id="btnNiveles" class="azul" type="submit">Niveles del Curso</button>
+            </div>
+
+            <div id="botones" class="division">
+                <button id="btnEditar" class="verde" type="submit">Editar</button>
+                <button id="btnEliminar" class="rojo" type="button">Eliminar</button>
+            </div>
+        </div>
+
         <form id="datos" method="post" class="datoscurso">
+            <input type="hidden" id="idcurso" name="idcurso">
             <div class="bloquefoto">
                 <img class="usuarioFoto" id="fotocurso" name="fotocurso" src="" />
                 <label for="">Imagen del curso:</label>
@@ -51,11 +82,8 @@ include_once "..\php\UsuarioLoggeado.php"
             </div>
             <div class="division2">
                 <div>
-                    <label for="rol">Selecciona un tipo de cobro:</label>
-                    <select name="tipo" id="tipo" name="tipo" tabindex="3">
-                        <option value="curso">Por curso</option>
-                        <option value="nivel">Por nivel</option>
-                    </select>
+                    <label for="rol">Tipo de cobro:</label>
+                    <label id="tipo"></label>
                 </div>
                 <div id="preciocurso">
                     <label>Costo del curso:</label>
@@ -64,7 +92,10 @@ include_once "..\php\UsuarioLoggeado.php"
                     <p id="vaciocosto">* No puede dejar el costo del curso vac&iacute;o.</p>
                 </div>
             </div>
-            <button type="submit" tabindex="5">Crear Curso</button>
+            <div id="ebotones" class="ebotones">
+                <button id="btnGuardar" class="verde" type="submit" tabindex="3">Guardar</button>
+                <button id="btnCancelar" class="rojo" type="button" tabindex="4">Cancelar</button>
+            </div>
         </form>
 
     </div>
@@ -77,7 +108,7 @@ include_once "..\php\UsuarioLoggeado.php"
     </div>
 
     <script src="../js/jquery-3.6.0.min.js"></script>
-    <script src="../js/CrearCurso.js"></script>
+    <script src="../js/VerCursoMaestro.js"></script>
 
 </body>
 

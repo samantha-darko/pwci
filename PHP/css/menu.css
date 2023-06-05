@@ -85,12 +85,15 @@
     margin: 0 auto;
     padding: 0;
 }
+
 #menu-right ul li {
     position: relative;
     float: right;
-    margin: 0;
+    margin: 0 auto;
     padding: 0;
+    width: 9%;
 }
+
 #menu-left ul li a, #menu-right ul li a{
     transition: background-color .5s;
 }

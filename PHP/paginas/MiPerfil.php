@@ -58,7 +58,7 @@ include_once '../php/UsuarioLoggeado.php'; ?>
             </div>
             <div class="datos">
                 <button id="editar" onclick="location.href = '../paginas/EditarPerfil.php';">Editar Perfil</button>
-                <button id="salir" onclick="salir()">Cerrar Sesi&oacute;n</button>
+                <button id="cerrar" onclick="salir()">Cerrar Sesi&oacute;n</button>
             </div>
 
         </div>

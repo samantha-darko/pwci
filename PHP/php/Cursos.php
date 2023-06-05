@@ -5,7 +5,7 @@ function Paginar($cantidad)
 {
 
     $api = new ApiCurso();
-    $cursos = $api->TodosCursosMaestro();
+    $cursos = $api->LosMasVistos();
 
     $items = '';
     if (!empty($cursos)) {
@@ -19,8 +19,7 @@ function Paginar($cantidad)
 
         $total = count($cursos);
 
-        $stmt = $api->Listado($offset, $cantidad);
-        $stmt->execute();
+        $stmt = $api->ListadoLosMasVistos($offset, $cantidad);
         $items .= '<div class="cursos">';
         while ($dato = $stmt->fetch((PDO::FETCH_ASSOC))) {
             $items .= '<div class="infocurso">';

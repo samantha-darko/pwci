@@ -1,6 +1,8 @@
 function Agregar(idcurso) {
-    //window.location.href = '../php/InscribirCurso.php?curso=' + idcurso;
-    idusuario = sessionStorage.getItem('idusuario')
+    sessionStorage.setItem('curso', idcurso);
+    window.location.href = '../paginas/InscribirCurso.php?curso=' + idcurso;
+
+    /*idusuario = sessionStorage.getItem('idusuario')
     $.ajax({
         url: '../php/InscribirCurso.php?curso=' + idcurso + '&idusuario=' + idusuario,
         success: function (resultado) {
@@ -29,7 +31,7 @@ function Agregar(idcurso) {
                 }
             }
         }
-    })
+    })*/
 }
 
 function VerificarSesion() {

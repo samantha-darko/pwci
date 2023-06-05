@@ -2,7 +2,7 @@ let addcourse = document.querySelector("#addcourse")
 
 function editar(idcurso) {
     sessionStorage.setItem('curso', idcurso);
-    window.location.href = '../paginas/VerCurso.php?curso=' + idcurso;
+    window.location.href = '../paginas/VerCursoMaestro.php?curso=' + idcurso;
 }
 
 function VerificarSesion() {
@@ -30,10 +30,10 @@ $(document).ready(function () {
         }
         sessionStorage.clear()
         $.ajax({
-            url:'../php/CerrarSesion.php',
-            success: function(resultado){
+            url: '../php/CerrarSesion.php',
+            success: function (resultado) {
                 var res = JSON.parse(resultado)
-                if(res){
+                if (res) {
                     window.location.href = '../paginas/IniciarSesion.php'
                 }
             }

@@ -17,6 +17,15 @@
     width: 100%;
 }
 
+#info {
+    display: block;
+    text-align: center;
+}
+
+#datos {
+    display: none;
+}
+
 .division label,
 .division2 label {
     width: 100%;
@@ -79,30 +88,67 @@
     display: none;
 }
 
-#datos button {
+#fotocurso,
+#foto {
     display: block;
-    width: 50%;
-    margin: 5% auto;
+    margin: 2% auto;
+    width: 100%;
+    object-fit: cover;
+}
+
+#botones,
+#ebotones {
+    display: flex;
+    width: 80%;
+    margin: 40px auto 20px auto;
+}
+
+#botones button,
+#ebotones button {
+    display: block;
+    width: 30%;
+    margin: 20px auto;
+
     padding: 10px 0;
-    font-size: 18px;
     border-radius: 5px;
-    background-color: #98CA3F;
-    color: #F2F2F2;
     border-style: none;
     font-weight: bold;
     cursor: pointer;
     box-shadow: 2px 2px rgba(0, 0, 0, 0.5);
     transition: transform .2s;
     outline: 0 none;
+    color: #F2F2F2;
 }
 
-#datos button:hover {
+#botones button:hover,
+#ebotones button:hover {
     transform: scale(1.05);
 }
 
-#fotocurso {
+.verde {
+    background-color: #98CA3F;
+}
+
+.rojo {
+    background-color: #FF331F;
+}
+
+.azul {
     display: block;
-    margin: 2% auto;
-    width: 100%;
-    object-fit: cover;
+    width: 30%;
+    margin: 30px auto 100px auto;
+    padding: 10px 0;
+    border-radius: 5px;
+    border-style: none;
+    font-weight: bold;
+    cursor: pointer;
+    box-shadow: 2px 2px rgba(0, 0, 0, 0.5);
+    transition: transform .2s;
+    outline: 0 none;
+    color: #F2F2F2;
+    background-color: #0791E6;
+}
+
+.azul:hover {
+    transform: scale(1.05);
 }

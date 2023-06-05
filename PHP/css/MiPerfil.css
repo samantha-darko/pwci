@@ -277,7 +277,7 @@ textarea:focus {
     transform: scale(1.05);
 }
 
-#salir{
+#cerrar, #cancelar{
     background-color: #FF331F;
 }
 

@@ -4,8 +4,8 @@ include_once 'Api.php';
 include_once 'Clases.php';
 
 try {
-    $msj = [];
     session_start();
+    $msj = [];
     $api = new ApiCurso();
     $curso = $_GET["curso"];
     $usuario = $_SESSION["id_usuario"];

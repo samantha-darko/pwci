@@ -11,14 +11,13 @@ if (isset($_SESSION['acceso'])) {
             $_SESSION['nombre'], $_SESSION['apellido_p'], $_SESSION['apellido_m'],
             $_SESSION['fch_nacimiento'], $_SESSION['genero'], $_SESSION['errores'], 
             $_SESSION['baja_logica'], $_SESSION['fch_ingreso']);
-
         if($datos->rol === "alumno"){
             $menu = '<div class="box-menu"><nav id="menu-left"><ul><li><a href="PaginaPrincipal.php"><img src="../multmedia/logo.png" tittle="Jaiko">Jaiko</a>';
             $menu .= '<ul><li><a href="construccion.php"><i class="fa fa-solid fa-circle-info"></i></i> Contactanos</a></li>';
-            $menu .= '<li><a href="construccion.php"><i class="fa fa-solid fa-map-location-dot"></i></i> Ver Ubicaci&oacute;n</a></li>';
             $menu .= '<li><a href="construccion.php"><i class="fa fa-solid fa-address-card"></i></i> Acerca de Nosotros</a></li>';
-            $menu .= '</ul></li></ul></nav>';
-            $menu .= '<nav id="menu-right"><ul><li><a href="PaginaPrincipal.php"><img src="data:png;base64,' . base64_encode($datos->imagen) . '"/>';
+            $menu .= '</ul></li></ul></nav>';            
+            $menu .= '<nav id="menu-right"><ul>';
+            $menu .= '<li><a href="PaginaPrincipal.php"><img src="data:png;base64,' . base64_encode($datos->imagen) . '"/>';
             $menu .= '<label>' . $datos->nombre . '</label></a>';
             $menu .= '<ul><li><a href="MiPerfil.php"><i class="fa fa-duotone fa-eye"></i> Mi Perfil</a></li>';
             $menu .= '<li><a href="MisCursos.php"><i class="fa-solid fa-circle-plus"></i> Mis Cursos</a></li>';
@@ -32,7 +31,6 @@ if (isset($_SESSION['acceso'])) {
         if($datos->rol === "maestro"){
             $menu = '<div class="box-menu"><nav id="menu-left"><ul><li><a href="Dashboard.php"><img src="../multmedia/logo.png" tittle="Jaiko"> Jaiko</a>';
             $menu .= '<ul><li><a href="construccion.php"><i class="fa fa-solid fa-circle-info"></i></i> Contactanos</a></li>';
-            $menu .= '<li><a href="construccion.php"><i class="fa fa-solid fa-map-location-dot"></i></i> Ver Ubicaci&oacute;n</a></li>';
             $menu .= '<li><a href="construccion.php"><i class="fa fa-solid fa-address-card"></i></i> Acerca de Nosotros</a></li>';
             $menu .= '</ul></li></ul></nav>';
             $menu .= '<nav id="menu-right"><ul><li><a href="Dashboard.php"><img src="data:png;base64,' . base64_encode($datos->imagen) . '"/>';

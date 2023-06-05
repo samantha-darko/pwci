@@ -145,7 +145,8 @@ class ApiCliente
         return $msj;
     }
 
-    public function MisCursos($idusuario){
+    public function MisCursos($idusuario)
+    {
         $db = new DB();
         $conn = $db->connect();
         $sql = ("SELECT id_curso, id_usuario_f, titulo, descripcion, 
@@ -198,6 +199,34 @@ class ApiCurso
         }
     }
 
+    public function Editar($datos)
+    {
+        try {
+            $msj = '';
+            $db = new DB();
+            $conn = $db->connect();
+
+            $sql = ("call sp_curso(?, ?, ?, ?, ?, ?, 'U');");
+            $stmt = $conn->prepare($sql);
+
+            $stmt->bindValue(1, $datos->id_curso);
+            $stmt->bindValue(2, $datos->id_usuario_f);
+            $stmt->bindValue(3, $datos->titulo);
+            $stmt->bindValue(4, $datos->descripcion);
+            $stmt->bindParam(5, $datos->imagen, PDO::PARAM_LOB);
+            $stmt->bindValue(6, $datos->costo);
+            $stmt->execute();
+            if ($stmt->rowCount() > 0) {
+                $row = $stmt->fetch();
+                $msj = array($row['codigo'], $row['mensaje']);
+            }
+        } catch (PDOException $e) {
+            $msj = "Error en servidor: " . $e->getMessage();
+        }
+
+        return $msj;
+    }
+
     public function Ver($idcurso, $idusuario)
     {
         try {
@@ -230,28 +259,82 @@ class ApiCurso
         }
     }
 
-    function Listado($inicio, $registros)
+    function LosMasVistos()
     {
-        $db = new DB();
-        $conn = $db->connect();
-        $sql = ("SELECT id_curso, id_usuario_f, titulo, descripcion, 
-        activo, imagen, costo from curso LIMIT $inicio,$registros");
-        $stmt = $conn->prepare($sql);
+        try {
+            $db = new DB();
+            $conn = $db->connect();
+            $sql = ("call sp_consulta('', '', '', 'LosMasVistos');");
+            $stmt = $conn->prepare($sql);
 
-        return $stmt;
+            $stmt->execute();
+            $result = $stmt->fetchAll((PDO::FETCH_ASSOC));
+
+            return $result;
+        } catch (PDOException $e) {
+            $stmt = "Error en servidor: " . $e->getMessage();
+            return $stmt;
+        }
     }
-    public function TodosCursosMaestro()
-    {
-        $db = new DB();
-        $conn = $db->connect();
-        $sql = ("SELECT id_curso, id_usuario_f, titulo, descripcion, 
-        activo, imagen, costo from curso");
-        $stmt = $conn->prepare($sql);
-        $stmt->execute();
-        $result = $stmt->fetchAll((PDO::FETCH_ASSOC));
 
-        return $result;
+    function ListadoLosMasVistos($inicio, $registros)
+    {
+        try {
+            $db = new DB();
+            $conn = $db->connect();
+            $sql = ("call sp_consulta('', ?, ?, 'ListadoLosMasVistos');");
+            $stmt = $conn->prepare($sql);
+
+            $stmt->bindValue(1, $inicio);
+            $stmt->bindValue(2, $registros);
+
+            $stmt->execute();
+
+            return $stmt;
+        } catch (PDOException $e) {
+            $stmt = "Error en servidor: " . $e->getMessage();
+            return $stmt;
+        }
+    }
+
+    function ListadoMaestro($id, $inicio, $registros)
+    {
+        try {
+            $db = new DB();
+            $conn = $db->connect();
+            $sql = ("call sp_consulta(?, ?, ?, 'ListadoMaestro');");
+            $stmt = $conn->prepare($sql);
+
+            $stmt->bindValue(1, $id);
+            $stmt->bindValue(2, $inicio);
+            $stmt->bindValue(3, $registros);
+
+            $stmt->execute();
+
+            return $stmt;
+        } catch (PDOException $e) {
+            $stmt = "Error en servidor: " . $e->getMessage();
+            return $stmt;
+        }
+    }
+
+    public function TodosCursosMaestro($id)
+    {
+        try {
+            $db = new DB();
+            $conn = $db->connect();
+            $sql = ("call sp_consulta(?, '', '', 'TodosCursosMaestro');");
+            $stmt = $conn->prepare($sql);
+
+            $stmt->bindValue(1, $id);
+
+            $stmt->execute();
+            $result = $stmt->fetchAll((PDO::FETCH_ASSOC));
+
+            return $result;
+        } catch (PDOException $e) {
+            $result = "Error en servidor: " . $e->getMessage();
+            return $result;
+        }
     }
 }
-
-?>

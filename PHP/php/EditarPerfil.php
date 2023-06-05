@@ -57,8 +57,6 @@ try {
         $genero = '';
     }
 
-    //$tipoFoto = $_FILES['image']['type'];
-
     $datos = new Usuario(0, $email, $contra, $rol, $imagen, $nombre, $apellido_p, $apellido_m, $fch_nacimiento, $genero, 0, 0, 0);
     $msj = $api->Editar($datos);
 

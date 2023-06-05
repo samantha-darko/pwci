@@ -166,6 +166,7 @@ create table nivel(
     contenido				varchar(2000)	not null,
 	costo					decimal(15, 2)	not null,
     video					longblob		not null,
+    baja_logica				bit				default 0 not null,
     
     primary key(id_nivel)
 )engine=InnoDB auto_increment=261296;

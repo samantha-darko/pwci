@@ -5,9 +5,10 @@ function Paginar($cantidad)
 {
 
     $api = new ApiCurso();
-    $cursos = $api->TodosCursosMaestro();
-
+    $usuario = $_SESSION["id_usuario"];
+    $cursos = $api->TodosCursosMaestro($usuario);
     $items = '';
+
     if (!empty($cursos)) {
         if (!isset($_GET['pag']))
             $_GET['pag'] = 1;
@@ -18,10 +19,8 @@ function Paginar($cantidad)
         $offset = ($pag - 1) * 1;
 
         $total = count($cursos);
-
-        $stmt = $api->Listado($offset, $cantidad);
-        $stmt->execute();
-        $items .= '<div class="cursos">';
+        $stmt = $api->ListadoMaestro($usuario, $offset, $cantidad);
+        $items = '<div class="cursos">';
         while ($dato = $stmt->fetch((PDO::FETCH_ASSOC))) {
             $items .= '<div class="infocurso">';
             $items .= '<img src="data:png;base64,' . base64_encode($dato['imagen']) . '"/>';
@@ -38,6 +37,7 @@ function Paginar($cantidad)
         }
         $items .= '</div>';
     }
+
     return $items;
 }
 ?>
