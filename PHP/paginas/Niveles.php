@@ -51,7 +51,7 @@ include_once '../php/ObtenerNiveles.php'; ?>
                 <p id="vacioarchivos">* Debe seleccionar al menos 1 archivo a subir.</p>
             </div>
 
-            <div class="division">
+            <div id="costonivel" class="division">
                 <label>Costo del nivel:</label>
                 <input type="number" name="costo" id="costo" placeholder="0.00" tabindex="3">
                 <p id="cerocosto">* El costo del nivel no puede ser $0.</p>
@@ -67,7 +67,6 @@ include_once '../php/ObtenerNiveles.php'; ?>
         if ($items != '') {
             echo $items;
         } ?>
-
 
     </div>
 

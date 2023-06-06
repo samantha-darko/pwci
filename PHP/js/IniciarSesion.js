@@ -9,8 +9,6 @@ let errorcontra = document.querySelector("#errorcontra");
 let vaciocorreo = document.querySelector("#vaciocorreo");
 let vaciocontra = document.querySelector("#vaciocontra");
 
-
-
 function Login(datos) {
     console.log(datos)
     if (datos[0] == 'valido') {
@@ -25,6 +23,8 @@ function Login(datos) {
                 case "alumno": window.location.href = "PaginaPrincipal.php";
                     break;
                 case "maestro": window.location.href = "Dashboard.php";
+                    break;
+                case "admin": window.location.href = "Administrador.php";
                     break;
             }
         }, 3000)
@@ -127,6 +127,7 @@ $(document).ready(function () {
             })
                 .then(resultado => resultado.json())
                 .then(resultado => Login(resultado))
+
         }
 
     })

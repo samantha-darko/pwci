@@ -24,7 +24,7 @@ create table usuario(
 	apellido_m 				varchar(200) 	not null,
 	fch_nacimiento 			date 			not null,
 	genero 					varchar(25) 	not null,
-    errores					int				not null,
+    errores					int				default 0 not null,
     baja_logica				bit				default 0 not null,
 	fch_ingreso 			date 			default now() not null,
     

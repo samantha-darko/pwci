@@ -131,29 +131,31 @@ $(document).ready(function () {
             vacioresumen.style.display = "none";
         }
 
-        if (costo.value.length === 0) {
-            agregar = false
-            costo.style.borderColor = '#FF331F'
-            cerocosto.style.display = "block";
-            vaciocosto.style.display = "none";
-        } else if (costo.value < 1) {
-            agregar = false
-            costo.style.borderColor = '#FF331F'
-            cerocosto.style.display = "none";
-            vaciocosto.style.display = "block";
-        } else {
-            costo.style.borderColor = 'gray'
-            cerocosto.style.display = "none";
-            vaciocosto.style.display = "none";
-        }
+        if (document.querySelector("#costonivel").style.display === 'block') {
+            if (costo.value.length === 0) {
+                agregar = false
+                costo.style.borderColor = '#FF331F'
+                cerocosto.style.display = "block";
+                vaciocosto.style.display = "none";
+            } else if (costo.value < 1) {
+                agregar = false
+                costo.style.borderColor = '#FF331F'
+                cerocosto.style.display = "none";
+                vaciocosto.style.display = "block";
+            } else {
+                costo.style.borderColor = 'gray'
+                cerocosto.style.display = "none";
+                vaciocosto.style.display = "none";
+            }
 
-        if (archivos.value.length === 0) {
-            agregar = false
-            archivos.style.borderColor = '#FF331F'
-            vacioarchivos.style.display = "block";
-        } else {
-            archivos.style.borderColor = 'gray'
-            vacioarchivos.style.display = "none";
+            if (archivos.value.length === 0) {
+                agregar = false
+                archivos.style.borderColor = '#FF331F'
+                vacioarchivos.style.display = "block";
+            } else {
+                archivos.style.borderColor = 'gray'
+                vacioarchivos.style.display = "none";
+            }
         }
 
         if (agregar) {

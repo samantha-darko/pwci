@@ -6,6 +6,12 @@ function Paginar()
     $api = new ApiNivel();
     $curso = $_GET["curso"];
     $niveles = $api->TotalNiveles($curso);
+    $costo = $api->CostoCurso($curso);
+    if ($costo < 1) {
+        echo '<script>document.querySelector("#costonivel").style.display = "none"</script>';
+    } else {
+        echo '<script>document.querySelector("#costonivel").style.display = "block"</script>';
+    }
     $items = '';
     $archivos = '';
 
@@ -20,7 +26,7 @@ function Paginar()
 
         $total = count($niveles);
         $stmt = $api->ListadoNiveles($curso, $offset, 1);
-        $items = '<div class="niveles">';
+        $items .= '<div class="niveles">';
         while ($dato = $stmt->fetch((PDO::FETCH_ASSOC))) {
             //$items .= '<img src="data:png;base64,' . base64_encode($dato['imagen']) . '"/>';
             $items .= '<div class="division">';
@@ -66,7 +72,7 @@ function Paginar()
 
                 $items .= '</div>';
             }
-            
+
             $items .= '</div>';
             $items .= '<button id="btnEliminar" onclick="eliminar(' . $dato['id_nivel'] . ')">Eliminar</button>';
         }

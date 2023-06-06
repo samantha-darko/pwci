@@ -107,3 +107,29 @@ class Nivel
         $this->baja_logica = $baja_logica;
     }
 }
+
+class Categoria
+{
+    public $id_categoria;
+    public $id_usuario_f;
+    public $titulo;
+    public $descripcion;
+    public $fecha_creacion;
+    public $baja_logica;
+
+    public function __construct(
+        $id_categoria,
+        $id_usuario_f,
+        $titulo,
+        $descripcion,
+        $fecha_creacion,
+        $baja_logica
+    ) {
+        $this->id_categoria = $id_categoria;
+        $this->id_usuario_f = $id_usuario_f;
+        $this->titulo = $titulo;
+        $this->descripcion = $descripcion;
+        $this->fecha_creacion = $fecha_creacion;
+        $this->baja_logica = $baja_logica;
+    }
+}

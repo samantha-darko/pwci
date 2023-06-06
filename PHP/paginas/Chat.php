@@ -1,8 +1,8 @@
 <!DOCTYPE html>
 <html lang="es-ES">
 <?php session_start();
-include_once '../php/UsuarioLoggeado.php';
-include_once '../php/CursosMaestro.php'; ?>
+include_once "..\php\UsuarioLoggeado.php"
+?>
 
 <head>
     <meta charset="UTF-8">
@@ -14,37 +14,33 @@ include_once '../php/CursosMaestro.php'; ?>
     <link rel="stylesheet" href="../boostrap/css/bootstrap.min.css">
 
     <link rel="stylesheet" href="../css/base.css">
-    <link rel="stylesheet" href="../css/Dashboard.css">
+    <link rel="stylesheet" href="../css/Chat.css">
 
     <link rel="shortcut icon" href="../multmedia/logo.png" />
-
-    <title>Dashboard | Jaiko</title>
+    <title>Chat - Jaiko</title>
 </head>
 
 <body>
 
-    <?php echo $menu; ?>
+    <?php echo $menu ?>
 
-    <div id="ventana-alertas" class="modal">
+    <div id="ventana-modal" class="modal">
 
     </div>
 
     <div class="box-container" id="box-container">
-
-        <?php
-        $items = Paginar(3);
-        if ($items != '') {
-            echo $items;
-        } else { ?>
-        <div class="sincursos">
-            <img src="../multmedia/sincursos.jpg" alt="">
-            <h2>Aún no has ingresado cursos.</h2>
+        <div class="chat">
+            <div class="message">
+                <span class="sender">Usuario 1:</span>
+                <span class="message-content">¡Hola! ¿Cómo estás?</span>
+                <span class="timestamp">10:00 AM</span>
+            </div>
         </div>
-        <?php } ?>
 
-        <div class="crearcurso">
-            <button id="addcourse">Crear Curso</button>
-        </div>
+        <form class="message-form">
+            <input type="text" id="message-input" placeholder="Escribe tu mensaje..." />
+            <button type="submit">Enviar</button>
+        </form>
     </div>
 
     <div class="box-footer">
@@ -55,7 +51,7 @@ include_once '../php/CursosMaestro.php'; ?>
     </div>
 
     <script src="../js/jquery-3.6.0.min.js"></script>
-    <script src="../js/Dashboard.js"></script>
+    <script src="../js/Chat.js"></script>
 
 </body>
 

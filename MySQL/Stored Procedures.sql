@@ -30,7 +30,7 @@ begin
         
 	DECLARE EXIT HANDLER FOR SQLEXCEPTION 
 		SELECT 100 as codigo,
-        'Error en base de datos' as Message; 
+        'Error en base de datos' as mensaje; 
 
 	if opcion =	'I' then
 	INSERT INTO usuario(email, contra, rol, imagen, nombre, apellido_p, apellido_m, fch_nacimiento, genero)
@@ -90,12 +90,14 @@ begin
 	set @temp_errores = (select errores from usuario where baja_logica = 0 and email = sp_email);
     if @temp_contra <> '' then
         if @temp_contra = sp_contra and @temp_errores < 3 then
-			update usuario set errores = 0 where id_usuario = (select id_usuario from usuario  where baja_logica = 0 and email = sp_email);
-			select * from usuario where baja_logica = 0 and email = sp_email and contra = sp_contra;
+			#update usuario set errores = 0 where id_usuario = (select id_usuario from usuario  where baja_logica = 0 and email = sp_email);
+			UPDATE usuario SET errores = 0 WHERE id_usuario IN (SELECT id_usuario FROM (SELECT id_usuario FROM usuario WHERE baja_logica = 0 AND email = sp_email) AS temp);
+            select * from usuario where baja_logica = 0 and email = sp_email and contra = sp_contra;
 		else
 			if @temp_errores < 3 then
-				update usuario set errores = errores + 1 where id_usuario = (select id_usuario from usuario  where baja_logica = 0 and email = sp_email);
-				select CONCAT('te quedan ', (3 - (@temp_errores + 1)), ' intentos') as mensaje;
+				#update usuario set errores = errores + 1 where id_usuario = (select id_usuario from usuario  where baja_logica = 0 and email = sp_email);
+				UPDATE usuario SET errores = errores + 1 WHERE id_usuario IN (SELECT id_usuario FROM (SELECT id_usuario FROM usuario WHERE baja_logica = 0 AND email = sp_email) AS temp);
+                select CONCAT('te quedan ', (3 - (@temp_errores + 1)), ' intentos') as mensaje;
             else
 				select 'cuenta bloqueada' as mensaje;
             end if;
@@ -174,7 +176,7 @@ begin
         
 	DECLARE EXIT HANDLER FOR SQLEXCEPTION 
 		SELECT 100 as codigo,
-        'Error en base de datos' as Message; 
+        'Error en base de datos' as mensaje; 
 
 	if opcion =	'I' then
 		INSERT INTO categoria(id_usuario_f, titulo, descripcion)
@@ -227,7 +229,7 @@ begin
         
 	DECLARE EXIT HANDLER FOR SQLEXCEPTION 
 		SELECT 100 as codigo,
-       'Error en base de datos' as Message;
+       'Error en base de datos' as mensaje;
        
 	if opcion =	'I' then
 		INSERT INTO curso(id_usuario_f, titulo, descripcion, imagen, costo)
@@ -279,7 +281,7 @@ begin
         
 	DECLARE EXIT HANDLER FOR SQLEXCEPTION 
 		SELECT 100 as codigo,
-        'Error en base de datos' as Message; 
+        'Error en base de datos' as mensaje; 
 
 	if opcion =	'I' then
 		INSERT INTO curso_inscrito(id_curso_f, id_usuario_f, nivel_actual, finalizado)
@@ -366,5 +368,20 @@ begin
         where id_curso_f = sp_id
         LIMIT sp_inicio, sp_cantidad;
     end if;
+    
+    if opcion = 'TotalCategorias' then
+		SELECT id_categoria, id_usuario_f, titulo, descripcion, fecha_creacion, baja_logica from categoria
+        where id_usuario_f = sp_id;
+    end if;
+    
+    if opcion = 'ListadoCategorias' then
+		SELECT id_categoria, id_usuario_f, titulo, descripcion, fecha_creacion, baja_logica from categoria
+        where id_usuario_f = sp_id
+        LIMIT sp_inicio, sp_cantidad;
+    end if;
+    
+    if opcion = 'CostoCurso' then
+		select costo from curso where id_curso = sp_id;
+	end if;
 end$$
 DELIMITER ;
