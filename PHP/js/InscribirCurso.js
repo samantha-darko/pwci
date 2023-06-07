@@ -1,3 +1,7 @@
+let _total = 0;
+let _curso = 0;
+let _niveles = [];
+
 function VerificarSesion() {
     if (!("idusuario" in sessionStorage)) {
         window.location.href = "../paginas/IniciarSesion.php"
@@ -7,9 +11,10 @@ function VerificarSesion() {
         url: '../php/VerCurso.php?curso=' + idcurso,
         success: function (resultado) {
             let res = JSON.parse(resultado);
-            console.log(res)
+            //console.log(res)
             let total = 0
             if (res != "vacio") {
+                _curso = res[0]['id_curso']
                 $("#curso").append("<label>Titulo Curso:</label>" +
                     "<h2>" + res[0]['titulo_curso'] + "</h2>" +
                     "<div id='infocurso'>" +
@@ -21,14 +26,15 @@ function VerificarSesion() {
                         "</div>")
                     $("#curso").append("<div><p>*No se puede pagar por nivel, debe comprar el curso completo</p>")
                     total = parseFloat(res[0]['costo_curso'])
-                    console.log(total)
                 } else {
                     $("#curso").append("<div><p>*Este curso se cobra por nivel</p>")
                 }
                 for (i = 0; i < res.length; i++) {
-                    console.log(res[i]);
-                    precio = parseFloat(res[i]['costo_nivel'])
-                    total = total + precio
+                    _niveles.push(res[i]['id_nivel']);
+                    if (res[i]['costo_nivel'] != "0.00") {
+                        precio = parseFloat(res[i]['costo_nivel'])
+                        total = total + precio
+                    }
                     $("#nivel").append(
                         "<div id='infonivel'>" +
                         "<div><label>Titulo nivel:</label>" +
@@ -37,8 +43,16 @@ function VerificarSesion() {
                         "<h4>" + res[i]['costo_nivel'] + "</h4></div>" +
                         "</div>")
                 }
-                console.log(total)
                 $("#total").append("<h1>Total a pagar: $" + total + "</h1>")
+            }
+            if (total != 0) {
+                console.log(total)
+                sessionStorage.setItem("total", total)
+                _total = total
+            } else {
+                if ("total" in sessionStorage) {
+                    sessionStorage.removeItem("total")
+                }
             }
         }
     })
@@ -47,49 +61,59 @@ function VerificarSesion() {
 document.addEventListener("DOMContentLoaded", VerificarSesion)
 
 paypal.Buttons({
-    // Order is created on the server and the order id is returned
-    createOrder() {
-        return fetch("../php/crearorden.php", {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json",
-            },
-            // use the "body" param to optionally pass additional order information
-            // like product skus and quantities
-            body: JSON.stringify({
-                cart: [
-                    {
-                        sku: "YOUR_PRODUCT_STOCK_KEEPING_UNIT",
-                        quantity: "YOUR_PRODUCT_QUANTITY",
-                    },
-                ],
-            }),
-        })
-            .then((response) => response.json())
-            .then((order) => order.id);
+    style: {
+        color: "blue",
+        shape: "pill",
+        label: "pay"
     },
-    // Finalize the transaction on the server after payer approval
-    onApprove(data) {
-        return fetch("../php/capturarorden.php", {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json",
-            },
-            body: JSON.stringify({
-                orderID: data.orderID
-            })
+    createOrder: function (data, actions) {
+        return actions.order.create({
+            purchase_units: [{
+                amount: {
+                    currency_code: "MXN",
+                    value: _total
+                }
+            }]
         })
-            .then((response) => response.json())
-            .then((orderData) => {
-                // Successful capture! For dev/demo purposes:
-                console.log('Capture result', orderData, JSON.stringify(orderData, null, 2));
-                const transaction = orderData.purchase_units[0].payments.captures[0];
-                alert(`Transaction ${transaction.status}: ${transaction.id}\n\nSee console for all available details`);
-                // When ready to go live, remove the alert and show a success message within this page. For example:
-                // const element = document.getElementById('paypal-button-container');
-                // element.innerHTML = '<h3>Thank you for your payment!</h3>';
-                // Or go to another URL:  window.location.href = 'thank_you.html';
+    },
+    onCancel: function (data) {
+        alert("Pago cancelado")
+        console.log(data)
+    },
+    onApprove: function (data, actions) {
+        return actions.order.capture().then(function (details) {
+            console.log(details);
+            // Realizar una solicitud AJAX utilizando jQuery
+            $.ajax({
+                url: '../php/Pagar.php',
+                type: 'POST',
+                data: {
+                    total: details.purchase_units[0].amount.value,
+                    status: details.status,
+                    idcurso: _curso,
+                    niveles: _niveles,
+                    datos: details
+                },
+                success: function (response) {
+                    document.getElementById("ventana-modal").style.display = "block"
+                    $(".modal").append("<div class='contenido-modal'> <a href='login.php'><img src='../multmedia/logo.png' titlle='Inicio'></a>" +
+                        "<div class='aviso-modal'> <p>Inscribir Curso </p> <h2>Inscripcion completa al curso</h2> </div> </div>")
+                    setTimeout(function () {
+                        $(".contenido-modal").remove();
+                        window.location.href = "PaginaPrincipal.php";
+                    }, 3000)
+                },
+                error: function () {
+                    document.getElementById("ventana-modal").style.display = "block"
+                    $(".modal").append("<div class='contenido-modal'> <a href='login.php'><i class='fa-sharp fa-solid fa-circle-xmark'></i><div class='aviso-modal'></a>" +
+                        "<div class='aviso-modal'> <p>Error</p> <h2>Hubo un error al procesar el pago, intente de nuevo más tarde.</h2> </div> </div>");
+                    setTimeout(function () {
+                        $(".contenido-modal").remove();
+                        document.getElementById("ventana-modal").style.display = "none"
+                    }, 3000)
+                }
             });
+        });
     }
 }).render('#paypal-button-container');
 

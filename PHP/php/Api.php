@@ -334,7 +334,6 @@ class ApiCurso
             $msj = "Error en servidor: " . $e->getMessage();
         }
     }
-
     public function Editar($datos)
     {
         try {
@@ -365,7 +364,6 @@ class ApiCurso
 
         return $msj;
     }
-
     public function Ver($idcurso, $idusuario)
     {
         try {
@@ -400,7 +398,6 @@ class ApiCurso
             $msj = "Error en servidor: " . $e->getMessage();
         }
     }
-
     public function VerCurso($idcurso)
     {
         try {
@@ -438,7 +435,6 @@ class ApiCurso
             $msj = "Error en servidor: " . $e->getMessage();
         }
     }
-
     function LosMasVistos()
     {
         try {
@@ -460,7 +456,6 @@ class ApiCurso
             return $stmt;
         }
     }
-
     function ListadoLosMasVistos($inicio, $registros)
     {
         try {
@@ -484,7 +479,6 @@ class ApiCurso
             return $stmt;
         }
     }
-
     function ListadoMaestro($id, $inicio, $registros)
     {
         try {
@@ -509,7 +503,6 @@ class ApiCurso
             return $stmt;
         }
     }
-
     public function TodosCursosMaestro($id)
     {
         try {
@@ -534,8 +527,6 @@ class ApiCurso
         }
     }
 }
-
-
 class ApiCategoria
 {
     public function Agregar($datos)
@@ -565,7 +556,6 @@ class ApiCategoria
             $msj = "Error en servidor: " . $e->getMessage();
         }
     }
-
     function Listado($id, $inicio, $registros)
     {
         try {
@@ -590,8 +580,6 @@ class ApiCategoria
             return $stmt;
         }
     }
-
-
     public function Total($id)
     {
         try {
@@ -613,6 +601,39 @@ class ApiCategoria
         } catch (PDOException $e) {
             $result = "Error en servidor: " . $e->getMessage();
             return $result;
+        }
+    }
+}
+
+class ApiPagos
+{
+    public function Agregar($datos)
+    {
+        try {
+            $msj = false;
+            $db = new DB();
+            $conn = $db->connect();
+            if (is_array($conn)) {
+                $msj = $conn['error'];
+                return $msj;
+            }
+            $sql = ("call sp_pagos(0, ?, ?, ?, ?, ?, 'I');");
+            $stmt = $conn->prepare($sql);
+
+            $stmt->bindValue(1, $datos->id_usuario_f);
+            $stmt->bindValue(2, $datos->titulo);
+            $stmt->bindValue(3, $datos->descripcion);
+            $stmt->bindParam(4, $datos->imagen, PDO::PARAM_LOB);
+            $stmt->bindValue(5, $datos->costo);
+            $stmt->execute();
+
+            if ($stmt->rowCount() > 0) {
+                $row = $stmt->fetch();
+                $msj = array($row['codigo'], $row['mensaje']);
+            }
+            return $msj;
+        } catch (PDOException $e) {
+            $msj = "Error en servidor: " . $e->getMessage();
         }
     }
 }

@@ -12,6 +12,8 @@ include_once "..\php\UsuarioLoggeado.php";
 
     <script src="https://kit.fontawesome.com/854b826ed2.js" crossorigin="anonymous"></script>
     <script type="text/javascript" src="../boostrap/js/bootstrap.min.js"></script>
+
+
     <link rel="stylesheet" href="../boostrap/css/bootstrap.min.css">
 
     <link rel="stylesheet" href="../css/base.css">
@@ -33,10 +35,12 @@ include_once "..\php\UsuarioLoggeado.php";
         <div id="curso"></div>
         <div id="nivel"></div>
         <div id="total"></div>
-        <div class="pagarbuton">
+        <!--<div class="pagarbuton">
             <button>Pagar</button>
-        </div>
-        <div class="pagar" id="paypal-button-container"></div>
+        </div>-->
+
+
+        <div id="paypal-button-container"></div>
     </div>
 
     <div class="box-footer">
@@ -46,9 +50,11 @@ include_once "..\php\UsuarioLoggeado.php";
         <a href="">Trabaja con nosotros</a>
     </div>
 
-    <script
-        src="https://www.paypal.com/sdk/js?client-id=AethZxpwW4JKFS27zgIA8qAqhqiLe3EMZYDNaKMnRsTBzb-BTlguvbOn_6BlN0q0ORhMhTkTECJiM398&currency=USD"></script>
+
     <script src="../js/jquery-3.6.0.min.js"></script>
+    <script
+        src="https://www.paypal.com/sdk/js?client-id=AethZxpwW4JKFS27zgIA8qAqhqiLe3EMZYDNaKMnRsTBzb-BTlguvbOn_6BlN0q0ORhMhTkTECJiM398&currency=MXN"></script>
+
     <script src="../js/InscribirCurso.js"></script>
 
 </body>
