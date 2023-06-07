@@ -326,6 +326,15 @@ in opcion 			varchar(100)
 )
 SQL SECURITY INVOKER
 begin
+	if opcion = 'VerCursoNivel' then
+		select id_curso, id_usuario_f, a.titulo as titulo_curso, a.descripcion as descripcion_curso, a.costo as costo_curso,
+		id_nivel, id_curso_f, b.titulo as titulo_nivel, resumen, b.costo as costo_nivel
+		from curso as A
+		JOIN nivel as B
+		ON A.id_curso = B.id_curso_f
+		WHERE a.id_curso = sp_id AND a.activo = 1 AND b.baja_logica = 0;
+	end if;
+    
 	if opcion =	'ListadoMaestro' then
 		SELECT id_curso, id_usuario_f, titulo, descripcion, 
         activo, imagen, costo from curso 
@@ -339,12 +348,20 @@ begin
 	end if;
         
 	if opcion =	'LosMasVistos' then
-		SELECT id_curso, id_usuario_f, titulo, descripcion, activo, imagen, costo from curso LIMIT 10;
+		select a.id_curso, a.id_usuario_f, a.titulo, a.descripcion, a.activo, a.imagen, a.costo
+		from curso as A
+		JOIN nivel as B
+		ON A.id_curso = B.id_curso_f
+		WHERE a.activo = 1 AND b.baja_logica = 0  LIMIT 10;
 	end if;
     
     if opcion =	'ListadoLosMasVistos' then
-		SELECT id_curso, id_usuario_f, titulo, descripcion, activo, imagen, costo from curso
-        LIMIT sp_inicio, sp_cantidad;
+		SELECT A.id_curso, A.id_usuario_f, A.titulo, A.descripcion, A.activo, A.imagen, A.costo
+		FROM curso AS A
+		JOIN nivel AS B ON A.id_curso = B.id_curso_f
+		WHERE A.activo = 1 AND B.baja_logica = 0
+		GROUP BY A.id_curso
+		LIMIT sp_inicio, sp_cantidad;
 	end if;
     
     if opcion = 'TotalRecursos' then

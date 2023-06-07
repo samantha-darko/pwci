@@ -14,6 +14,12 @@ let costo = document.querySelector("#costo")
 let cerocosto = document.querySelector("#cerocosto")
 let vaciocosto = document.querySelector("#vaciocosto")
 
+function mostrarArchivo(tipo, contenido, nombre) {
+    var data = "data:" + tipo + ";base64," + contenido;
+    var nuevaPestana = window.open(data);
+    nuevaPestana.document.title = nombre;
+}
+
 function ValidarSesion() {
     if (!("idusuario" in sessionStorage)) {
         window.location.href = "../paginas/IniciarSesion.php"

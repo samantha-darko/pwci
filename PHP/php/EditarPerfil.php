@@ -20,10 +20,11 @@ try {
     }else{
         $rol = '';
     }
+    
     $imagen;
-    if (isset($_POST['image'])) {
+    if (isset($_FILES['image'])) {
         $imagen = fopen($_FILES['image']['tmp_name'], 'rb');
-    }else{
+    } else {
         $imagen = '';
     }
     $nombre;
@@ -59,22 +60,22 @@ try {
 
     $datos = new Usuario(0, $email, $contra, $rol, $imagen, $nombre, $apellido_p, $apellido_m, $fch_nacimiento, $genero, 0, 0, 0);
     $msj = $api->Editar($datos);
-
     if ($msj) {
-        if (!empty($datos->contra))
-            $_SESSION['contra'] = $datos->contra;
-        if (!empty($datos->imagen))
-            $_SESSION['imagen'] = $datos->imagen;
-        if (!empty($datos->nombre))
-            $_SESSION['nombre'] = $datos->nombre;
-        if (!empty($datos->apellido_p))
-            $_SESSION['apellido_p'] = $datos->apellido_p;
-        if (!empty($datos->apellido_m))
-            $_SESSION['apellido_m'] = $datos->apellido_m;
-        if (!empty($datos->fch_nacimiento))
-            $_SESSION['fch_nacimiento'] = $datos->fch_nacimiento;
-        if (!empty($datos->genero))
-            $_SESSION['genero'] = $datos->genero;
+        $datos = $api->IniciarSesion($datos->email,$datos->contra);
+        if (!empty($datos['contra']))
+            $_SESSION['contra'] = $datos['contra'];
+        if (!empty($datos['imagen']))
+            $_SESSION['imagen'] = $datos['imagen'];
+        if (!empty($datos['nombre']))
+            $_SESSION['nombre'] = $datos['nombre'];
+        if (!empty($datos['apellido_p']))
+            $_SESSION['apellido_p'] = $datos['apellido_p'];
+        if (!empty($datos['apellido_m']))
+            $_SESSION['apellido_m'] = $datos['apellido_m'];
+        if (!empty($datos['fch_nacimiento']))
+            $_SESSION['fch_nacimiento'] = $datos['fch_nacimiento'];
+        if (!empty($datos['genero']))
+            $_SESSION['genero'] = $datos['genero'];
     }
     echo json_encode($msj);
 
@@ -82,5 +83,3 @@ try {
     $msj = "Error en servidor: " . $e->getMessage();
     echo json_encode($msj);
 }
-
-?>

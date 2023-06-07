@@ -39,18 +39,12 @@ try {
     if (isset($_SESSION['genero'])) {
         unset($_SESSION['genero']);
     }
+
+    // Borrar todas las variables de sesión
+    session_unset();
+
     echo json_encode(array(true));
     session_write_close();
 } catch (Throwable $th) {
     echo json_encode($th);
 }
-/*$script = '<script> document.querySelector("#ventana-alertas").style.display = "block"';
-$script .= '$(".modal").append("<div class="contenido-modal"><i class="fa-sharp fa-solid fa-circle-check"></i>"';
-$script .= '"<div class="aviso-modal"><p>Cerrar Sesión</p> <h2>Espere un momento mientras se cierra la sesión.</h2></div></div>");';
-$script .= 'setTimeout(function () {';
-$script .= '$(".contenido-modal").remove();';
-$script .= 'document.querySelector("#ventana-alertas").style.display = "none";';
-$script .= 'window.location.href = "../paginas/IniciarSesion.php"';
-$script .= '}, 2500)</script>';*/
-//echo $script;
-?>

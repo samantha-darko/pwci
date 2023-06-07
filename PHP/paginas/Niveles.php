@@ -53,7 +53,7 @@ include_once '../php/ObtenerNiveles.php'; ?>
 
             <div id="costonivel" class="division">
                 <label>Costo del nivel:</label>
-                <input type="number" name="costo" id="costo" placeholder="0.00" tabindex="3">
+                <input type="number" name="costo" id="costo" placeholder="0.00" tabindex="4">
                 <p id="cerocosto">* El costo del nivel no puede ser $0.</p>
                 <p id="vaciocosto">* No puede dejar el costo del nivel vac&iacute;o.</p>
             </div>

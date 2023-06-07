@@ -127,3 +127,10 @@
     font-weight: bold;
     font-size: 15px;
 }
+
+
+video{
+    display: block;
+    width: 80%;
+    margin: 0 auto;
+}

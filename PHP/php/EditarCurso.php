@@ -25,7 +25,7 @@ try {
     }
 
     $image;
-    if (isset($_POST['image'])) {
+    if (isset($_FILES['image'])) {
         $image = fopen($_FILES['image']['tmp_name'], 'rb');
     } else {
         $image = '';

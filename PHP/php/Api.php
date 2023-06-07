@@ -401,6 +401,44 @@ class ApiCurso
         }
     }
 
+    public function VerCurso($idcurso)
+    {
+        try {
+            $db = new DB();
+            $conn = $db->connect();
+            if (is_array($conn)) {
+                $msj = $conn['error'];
+                return $msj;
+            }
+            $sql = "CALL sp_consulta(?, 0, 0, 'VerCursoNivel');";
+            $stmt = $conn->prepare($sql);
+            $stmt->bindValue(1, $idcurso);
+            $stmt->execute();
+
+            $result = array();
+            while ($row = $stmt->fetch()) {
+                $result[] = array(
+                    "id_curso" => $row['id_curso'],
+                    "id_usuario_f" => $row['id_usuario_f'],
+                    "titulo_curso" => $row['titulo_curso'],
+                    "descripcion_curso" => $row['descripcion_curso'],
+                    "costo_curso" => $row['costo_curso'],
+                    "id_nivel" => $row['id_nivel'],
+                    "id_curso_f" => $row['id_curso_f'],
+                    "titulo_nivel" => $row['titulo_nivel'],
+                    "resumen" => $row['resumen'],
+                    "costo_nivel" => $row['costo_nivel']
+                );
+            }
+
+            if (!empty($result)) {
+                return $result;
+            }
+        } catch (PDOException $e) {
+            $msj = "Error en servidor: " . $e->getMessage();
+        }
+    }
+
     function LosMasVistos()
     {
         try {

@@ -7,10 +7,11 @@ function Paginar()
     $curso = $_GET["curso"];
     $niveles = $api->TotalNiveles($curso);
     $costo = $api->CostoCurso($curso);
-    if ($costo < 1) {
-        echo '<script>document.querySelector("#costonivel").style.display = "none"</script>';
-    } else {
+    $tipo = floatval($costo);
+    if ($tipo < 1) {
         echo '<script>document.querySelector("#costonivel").style.display = "block"</script>';
+    } else {
+        echo '<script>document.querySelector("#costonivel").style.display = "none"</script>';
     }
     $items = '';
     $archivos = '';
@@ -40,7 +41,7 @@ function Paginar()
 
             $db = new DB();
             $conn = $db->connect();
-            $stmt = $conn->prepare('SELECT * FROM recursos WHERE id_nivel_f = :id_nivel');
+            $stmt = $conn->prepare('SELECT nombre, tipo, contenido  FROM recursos WHERE id_nivel_f = :id_nivel');
             $stmt->bindParam(':id_nivel', $dato['id_nivel']);
             $stmt->execute();
             $archivos = $stmt->fetchAll(PDO::FETCH_ASSOC);
@@ -55,22 +56,22 @@ function Paginar()
                 // Generar el código HTML para mostrar el contenido multimedia
                 $items .= '<div class="contenido">';
                 $items .= '<p>Archivo: ' . $nombre . '</p>';
-
+                $items .= '<p>Archivo: <a href="data:' . $tipo . ';base64,' . base64_encode($contenido) . '" download="' . $nombre . '">Descargar</a></p>';
+                $items .= '<div class="archivo">';
                 if (strpos($tipo, 'image') === 0) {
                     // Si es una imagen, mostrarla
                     $items .= '<img src="data:' . $tipo . ';base64,' . base64_encode($contenido) . '">';
-                } elseif (strpos($tipo, 'video') === 0) {
+                }elseif (strpos($tipo, 'video') === 0) {
                     // Si es un video, mostrarlo
                     $items .= '<video controls>';
                     $items .= '<source src="data:' . $tipo . ';base64,' . base64_encode($contenido) . '" type="' . $tipo . '">';
                     $items .= 'Tu navegador no admite la reproducción de video.';
                     $items .= '</video>';
-                } else {
+                } /*else {
                     // Si es otro tipo de archivo, mostrar un enlace de descarga
                     $items .= '<p>Archivo: <a href="data:' . $tipo . ';base64,' . base64_encode($contenido) . '" download="' . $nombre . '">Descargar</a></p>';
-                }
-
-                $items .= '</div>';
+                }*/
+                $items .= '</div></div>';
             }
 
             $items .= '</div>';

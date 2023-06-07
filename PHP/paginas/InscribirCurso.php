@@ -1,7 +1,8 @@
 <!DOCTYPE html>
 <html lang="es-ES">
 <?php session_start();
-include_once "..\php\UsuarioLoggeado.php"
+include_once "..\php\UsuarioLoggeado.php";
+//include_once "..\php\VerCurso.php";
 ?>
 
 <head>
@@ -14,7 +15,7 @@ include_once "..\php\UsuarioLoggeado.php"
     <link rel="stylesheet" href="../boostrap/css/bootstrap.min.css">
 
     <link rel="stylesheet" href="../css/base.css">
-    <link rel="stylesheet" href="../css/CrearCurso.css">
+    <link rel="stylesheet" href="../css/InscribirCurso.css">
 
     <link rel="shortcut icon" href="../multmedia/logo.png" />
     <title>Inscribir Curso - Jaiko</title>
@@ -29,8 +30,7 @@ include_once "..\php\UsuarioLoggeado.php"
     </div>
 
     <div class="box-container" id="box-container">
-        
-
+        <div id="paypal-button-container"></div>
     </div>
 
     <div class="box-footer">
@@ -40,6 +40,7 @@ include_once "..\php\UsuarioLoggeado.php"
         <a href="">Trabaja con nosotros</a>
     </div>
 
+    <script src="https://www.paypal.com/sdk/js?client-id=AethZxpwW4JKFS27zgIA8qAqhqiLe3EMZYDNaKMnRsTBzb-BTlguvbOn_6BlN0q0ORhMhTkTECJiM398&currency=USD"></script>
     <script src="../js/jquery-3.6.0.min.js"></script>
     <script src="../js/InscribirCurso.js"></script>
 

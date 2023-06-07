@@ -29,18 +29,30 @@ include_once "..\php\UsuarioLoggeado.php"
     </div>
 
     <div class="box-container" id="box-container">
-        <div class="chat">
-            <div class="message">
-                <span class="sender">Usuario 1:</span>
-                <span class="message-content">¡Hola! ¿Cómo estás?</span>
-                <span class="timestamp">10:00 AM</span>
-            </div>
-        </div>
+        <h1>Mensajes Privados</h1>
 
-        <form class="message-form">
-            <input type="text" id="message-input" placeholder="Escribe tu mensaje..." />
-            <button type="submit">Enviar</button>
-        </form>
+        <div class="enviado">
+            <h2>Enviar Mensaje</h2>
+            <form id="enviarMensajeForm">
+                <label for="idEnviado">ID de remitente:</label>
+                <input type="text" id="idEnviado" name="idEnviado"><br>
+
+                <label for="idRecibido">ID de destinatario:</label>
+                <input type="text" id="idRecibido" name="idRecibido"><br>
+
+                <label for="mensaje">Mensaje:</label><br>
+                <textarea id="mensaje" name="mensaje"></textarea><br>
+
+                <button type="submit">Enviar</button>
+            </form>
+        </div>
+    </div>
+
+    <div class="box-container">
+        <div class="recibidos">
+            <h2>Mensajes Recibidos</h2>
+            <div id="mensajesContainer"></div>
+        </div>
     </div>
 
     <div class="box-footer">
