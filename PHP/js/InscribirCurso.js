@@ -8,7 +8,38 @@ function VerificarSesion() {
         success: function (resultado) {
             let res = JSON.parse(resultado);
             console.log(res)
-
+            let total = 0
+            if (res != "vacio") {
+                $("#curso").append("<label>Titulo Curso:</label>" +
+                    "<h2>" + res[0]['titulo_curso'] + "</h2>" +
+                    "<div id='infocurso'>" +
+                    "<div><label>Descripción:</label>" +
+                    "<p class='descripcion_curso'>" + res[0]['descripcion_curso'] + "</p></div>")
+                if (res[0]['costo_curso'] != "0.00") {
+                    $("#curso").append("<div><label>Costo curso:</label>" +
+                        "<h3 class='costo_curso'>" + res[0]['costo_curso'] + "</h3></div>" +
+                        "</div>")
+                    $("#curso").append("<div><p>*No se puede pagar por nivel, debe comprar el curso completo</p>")
+                    total = parseFloat(res[0]['costo_curso'])
+                    console.log(total)
+                } else {
+                    $("#curso").append("<div><p>*Este curso se cobra por nivel</p>")
+                }
+                for (i = 0; i < res.length; i++) {
+                    console.log(res[i]);
+                    precio = parseFloat(res[i]['costo_nivel'])
+                    total = total + precio
+                    $("#nivel").append(
+                        "<div id='infonivel'>" +
+                        "<div><label>Titulo nivel:</label>" +
+                        "<h4>" + res[i]['titulo_nivel'] + "</h4></div>" +
+                        "<div><label>Costo nivel:</label>" +
+                        "<h4>" + res[i]['costo_nivel'] + "</h4></div>" +
+                        "</div>")
+                }
+                console.log(total)
+                $("#total").append("<h1>Total a pagar: $" + total + "</h1>")
+            }
         }
     })
 }

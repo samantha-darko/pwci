@@ -6,8 +6,8 @@ function Paginar()
     $api = new ApiNivel();
     $curso = $_GET["curso"];
     $niveles = $api->TotalNiveles($curso);
-    $costo = $api->CostoCurso($curso);
-    $tipo = floatval($costo);
+    $datoscurso = $api->CostoCurso($curso);
+    $tipo = floatval($datoscurso[0]);
     if ($tipo < 1) {
         echo '<script>document.querySelector("#costonivel").style.display = "block"</script>';
     } else {
@@ -28,10 +28,14 @@ function Paginar()
         $total = count($niveles);
         $stmt = $api->ListadoNiveles($curso, $offset, 1);
         $items .= '<div class="niveles">';
+        $items .= '<div class="division">';
+        $items .= '<label>Título Curso</label>';
+        $items .= '<h2>' . $datoscurso[1] . '</h2>';
+        $items .= '</div>';
         while ($dato = $stmt->fetch((PDO::FETCH_ASSOC))) {
             //$items .= '<img src="data:png;base64,' . base64_encode($dato['imagen']) . '"/>';
             $items .= '<div class="division">';
-            $items .= '<label>Título</label>';
+            $items .= '<label>Título Nivel</label>';
             $items .= '<h2>' . $dato['titulo'] . '</h2>';
             $items .= '</div>';
             $items .= '<div class="division">';
@@ -61,16 +65,16 @@ function Paginar()
                 if (strpos($tipo, 'image') === 0) {
                     // Si es una imagen, mostrarla
                     $items .= '<img src="data:' . $tipo . ';base64,' . base64_encode($contenido) . '">';
-                }elseif (strpos($tipo, 'video') === 0) {
+                } elseif (strpos($tipo, 'video') === 0) {
                     // Si es un video, mostrarlo
                     $items .= '<video controls>';
                     $items .= '<source src="data:' . $tipo . ';base64,' . base64_encode($contenido) . '" type="' . $tipo . '">';
                     $items .= 'Tu navegador no admite la reproducción de video.';
                     $items .= '</video>';
                 } /*else {
-                    // Si es otro tipo de archivo, mostrar un enlace de descarga
-                    $items .= '<p>Archivo: <a href="data:' . $tipo . ';base64,' . base64_encode($contenido) . '" download="' . $nombre . '">Descargar</a></p>';
-                }*/
+                   // Si es otro tipo de archivo, mostrar un enlace de descarga
+                   $items .= '<p>Archivo: <a href="data:' . $tipo . ';base64,' . base64_encode($contenido) . '" download="' . $nombre . '">Descargar</a></p>';
+               }*/
                 $items .= '</div></div>';
             }
 

@@ -30,7 +30,13 @@ include_once "..\php\UsuarioLoggeado.php";
     </div>
 
     <div class="box-container" id="box-container">
-        <div id="paypal-button-container"></div>
+        <div id="curso"></div>
+        <div id="nivel"></div>
+        <div id="total"></div>
+        <div class="pagarbuton">
+            <button>Pagar</button>
+        </div>
+        <div class="pagar" id="paypal-button-container"></div>
     </div>
 
     <div class="box-footer">
@@ -40,7 +46,8 @@ include_once "..\php\UsuarioLoggeado.php";
         <a href="">Trabaja con nosotros</a>
     </div>
 
-    <script src="https://www.paypal.com/sdk/js?client-id=AethZxpwW4JKFS27zgIA8qAqhqiLe3EMZYDNaKMnRsTBzb-BTlguvbOn_6BlN0q0ORhMhTkTECJiM398&currency=USD"></script>
+    <script
+        src="https://www.paypal.com/sdk/js?client-id=AethZxpwW4JKFS27zgIA8qAqhqiLe3EMZYDNaKMnRsTBzb-BTlguvbOn_6BlN0q0ORhMhTkTECJiM398&currency=USD"></script>
     <script src="../js/jquery-3.6.0.min.js"></script>
     <script src="../js/InscribirCurso.js"></script>
 

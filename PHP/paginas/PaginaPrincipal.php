@@ -34,7 +34,7 @@ include_once '../php/Cursos.php';
         <div class="losmasvistos">
             <h1>Los más vistos</h1>
             <?php
-            $items = Paginar(4);
+            $items = Paginar(2);
             if ($items != '') {
                 echo $items;
             } ?>

@@ -268,7 +268,7 @@ class ApiNivel
             $stmt->execute();
             if ($stmt->rowCount() > 0) {
                 $row = $stmt->fetch();
-                $msj = $row['costo'];
+                $msj = array($row['costo'], $row['titulo']);
                 return $msj;
             }
         } catch (PDOException $e) {

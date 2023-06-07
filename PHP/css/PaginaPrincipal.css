@@ -25,13 +25,14 @@
 
 .cursos {
     display: flex;
+    width: 100%;
     margin: auto 0;
 }
 
 .infocurso {
     display: block;
     margin: 0 10px;
-    width: 40%;
+    width: 100%;
     border: solid 0.5px;
     border-color: #000000;
     border-radius: 2%;

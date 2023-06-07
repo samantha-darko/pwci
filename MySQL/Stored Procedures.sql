@@ -398,7 +398,7 @@ begin
     end if;
     
     if opcion = 'CostoCurso' then
-		select costo from curso where id_curso = sp_id;
+		select costo, titulo from curso where id_curso = sp_id;
 	end if;
 end$$
 DELIMITER ;
