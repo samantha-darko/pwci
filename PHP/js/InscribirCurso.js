@@ -1,5 +1,6 @@
 let _total = 0;
 let _curso = 0;
+let _usuario = 0;
 let _niveles = [];
 
 function VerificarSesion() {
@@ -7,6 +8,7 @@ function VerificarSesion() {
         window.location.href = "../paginas/IniciarSesion.php"
     }
     idcurso = sessionStorage.getItem('curso')
+    _usuario = sessionStorage.getItem('idusuario')
     $.ajax({
         url: '../php/VerCurso.php?curso=' + idcurso,
         success: function (resultado) {
@@ -92,7 +94,8 @@ paypal.Buttons({
                     status: details.status,
                     idcurso: _curso,
                     niveles: _niveles,
-                    datos: details
+                    datos: details,
+                    usuario: _usuario
                 },
                 success: function (response) {
                     document.getElementById("ventana-modal").style.display = "block"

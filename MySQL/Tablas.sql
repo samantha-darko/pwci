@@ -40,7 +40,7 @@ create table curso_inscrito(
     id_usuario_f			int				not null,
     nivel_actual			int				not null,
     finalizado				bit				not null,
-    fecha_inscripcion		date			default now() not null,
+    fecha_inscripcion		DATETIME		default now() not null,
     
     primary key(id_curso_inscrito)
 )engine=InnoDB auto_increment=261296;

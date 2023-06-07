@@ -284,11 +284,9 @@ begin
         'Error en base de datos' as mensaje; 
 
 	if opcion =	'I' then
-		INSERT INTO curso_inscrito(id_curso_f, id_usuario_f, nivel_actual, finalizado)
-		VALUES(sp_id_curso_f, sp_id_usuario_f, sp_nivel_actual, sp_finalizado);
-		
-		select 1 as codigo,
-		concat('registro exitoso') as mensaje;
+		INSERT INTO curso_inscrito(id_curso_f, id_usuario_f, nivel_actual, finalizado, fecha_inscripcion) 
+        VALUES(sp_id_curso_f, sp_id_usuario_f, sp_nivel_actual, 0, CURRENT_TIMESTAMP); 
+        SELECT LAST_INSERT_ID() as idcursoinscrito, 1 as codigo, concat("registro exitoso") as mensaje;		
 	end if;
     
 	if opcion = 'U' then
