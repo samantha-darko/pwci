@@ -37,3 +37,20 @@
     border: 1px gray solid;
     padding: 1% 0;
 }
+
+.info a {
+    font-weight: bold;
+    text-transform: uppercase;
+    color: #1E212B;
+    text-decoration: none;
+    background-image: linear-gradient(currentColor, currentColor);
+    background-position: 0% 100%;
+    background-repeat: no-repeat;
+    background-size: 0% 2px;
+    transition: background-size .3s;
+}
+
+.info a:hover {
+    color: #FEA82F;
+    background-size: 100% 2px;
+}

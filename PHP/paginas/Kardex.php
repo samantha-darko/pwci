@@ -26,19 +26,6 @@ include_once '../php/Kardex.php';
     <?php echo $menu ?>
 
     <div id="ventana-modal" class="modal"></div>
-
-    <div id="confirmacion" class="modal">
-        <div class="modal-contenido">
-            <h2>Finalizar Curso</h2>
-            <p>¿Estás seguro de que deseas marcar el curso como finalizado?</p>
-            <div class="botones">
-                <button id="btn-confirmar">Confirmar</button>
-                <button id="btn-cancelar">Cancelar</button>
-            </div>
-        </div>
-    </div>
-
-
     <div class="box-container" id="box-container">
         <h2>Kardex</h2>
         <?php echo $items; ?>
@@ -52,7 +39,6 @@ include_once '../php/Kardex.php';
     </div>
 
     <script src="../js/jquery-3.6.0.min.js"></script>
-    <script src="../js/Kardex.js"></script>
 </body>
 
 </html>
