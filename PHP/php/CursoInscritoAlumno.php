@@ -14,7 +14,7 @@ try {
 
     for ($i = 0; $i < count($ListaCursoInscrito); $i++) {
         $idcurso = $ListaCursoInscrito[$i]['idcurso'];
-        $items .= '<div id="' . $idcurso . '" class="cursoinscrito">';
+        $items .= '<div id="' . $ListaCursoInscrito[$i]['idcursoinscrito'] . '" class="cursoinscrito">';
         $items .= '<div class="infocurso">';
         $items .= '<img src="data:png;base64,' . base64_encode($ListaCursoInscrito[$i]['imagen_curso']) . '"/>';
         $items .= '<h2>' . $ListaCursoInscrito[$i]['titulo_curso'] . '</h2>';
@@ -31,7 +31,7 @@ try {
         }
         $items .= '</div>';
         if ($ListaCursoInscrito[$i]['finalizado'] === 0) {
-            $items .= '<button onclick="finalizar(' . $idcurso . ')" id=' . $ListaCursoInscrito[$i]['fecha_inscripcion'] . '>Finalizar Curso</button>';
+            $items .= '<button onclick="finalizar(' . $ListaCursoInscrito[$i]['idcursoinscrito'] . ')" id=' . $ListaCursoInscrito[$i]['fecha_inscripcion'] . '>Finalizar Curso</button>';
         } else {
             $items .= '<p>Este curso ya esta finalizado</p>';
         }

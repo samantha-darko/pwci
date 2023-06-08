@@ -1,8 +1,8 @@
 <!DOCTYPE html>
-<html lang="es">
+<html lang="es-ES">
 <?php session_start();
-include_once '../php/UsuarioLoggeado.php';
-include_once '../php/Kardex.php';
+include_once "..\php\UsuarioLoggeado.php";
+include_once "..\php\VerCursoHistorial.php";
 ?>
 
 <head>
@@ -11,23 +11,23 @@ include_once '../php/Kardex.php';
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <script src="https://kit.fontawesome.com/854b826ed2.js" crossorigin="anonymous"></script>
-    <link rel="stylesheet" href="../boostrap/css/bootstrap.min.css">
     <script type="text/javascript" src="../boostrap/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="../boostrap/css/bootstrap.min.css">
 
     <link rel="stylesheet" href="../css/base.css">
-    <link rel="stylesheet" href="../css/Kardex.css">
+    <link rel="stylesheet" href="../css/VerCursoAlumno.css">
 
     <link rel="shortcut icon" href="../multmedia/logo.png" />
-
-    <title>Kardex | Alumno</title>
+    <title>Ver Curso Historial - Jaiko</title>
 </head>
 
 <body>
+
     <?php echo $menu ?>
 
     <div id="ventana-modal" class="modal"></div>
-    <div class="box-container" id="box-container">
-        <h2>Kardex</h2>
+
+    <div class="box-container">
         <?php echo $items; ?>
     </div>
 
@@ -39,7 +39,8 @@ include_once '../php/Kardex.php';
     </div>
 
     <script src="../js/jquery-3.6.0.min.js"></script>
-    <script src="../js/Kardex.js"></script>
+    <script src="../js/VerCurso.js"></script>
+
 </body>
 
 </html>

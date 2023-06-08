@@ -26,7 +26,12 @@ function Paginar($cantidad)
             $items .= '<img src="data:png;base64,' . base64_encode($dato['imagen']) . '"/>';
             $items .= '<h2>' . $dato['titulo'] . '</h2>';
             $items .= '<label>' . $dato['descripcion'] . '</label>';
-            $items .= '<button onclick="editar(' . $dato['id_curso'] . ')">Ver más</button>';
+            if ($dato['activo'] === 1)
+                $items .= '<button onclick="editar(' . $dato['id_curso'] . ')">Ver más</button>';
+            else{
+                $items .= '<label>Este curso solo se puede visualizar, no se puede editar porque ya se elimino.</label>';
+                $items .= '<button onclick="ver(' . $dato['id_curso'] . ')">Ver más</button>';
+            }
             $items .= '</div>';
         }
         $items .= '</div>';
@@ -40,4 +45,3 @@ function Paginar($cantidad)
 
     return $items;
 }
-?>

@@ -23,6 +23,13 @@ try {
         $items .= '<div class="infonivel">';
         $items .= '<p>Contenido: ' . $ListaRecursos[$j]['recurso'] . '</p>';
         $items .= '<p>Archivo: <a href="data:' . $ListaRecursos[$j]['tipo'] . ';base64,' . base64_encode($ListaRecursos[$j]['contenido']) . '" download="' . $ListaRecursos[$j]['recurso'] . '">Descargar</a></p>';
+        if (strpos($ListaRecursos[$j]['tipo'], 'video') === 0) {
+            // Si es un video, mostrarlo
+            $items .= '<video controls>';
+            $items .= '<source src="data:' . $ListaRecursos[$j]['tipo'] . ';base64,' . base64_encode($ListaRecursos[$j]['contenido']) . '" type="' . $ListaRecursos[$j]['tipo'] . '">';
+            $items .= 'Tu navegador no admite la reproducción de video.';
+            $items .= '</video>';
+        }
         $items .= '</div>';
     }
     $items .= '</div>';

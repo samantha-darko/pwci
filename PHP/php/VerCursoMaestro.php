@@ -10,6 +10,9 @@ try {
     $curso = $_GET["curso"];
     $usuario = $_SESSION["id_usuario"];
     $msj = $api->Ver($curso, $usuario);
+    if($msj['activo'] === 0){
+        $msj = "Este curso se ha eliminado";
+    }
     
     echo json_encode($msj);
 } catch (PDOException $e) {

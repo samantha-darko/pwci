@@ -252,7 +252,7 @@ begin
     end if;
     
      if opcion = 'D' then 
-		update curso set baja_logica = 1 
+		update curso set activo = 0 
         where id_curso = sp_id_curso
         ;
         select 1 as codigo, 
@@ -287,9 +287,7 @@ begin
 		UPDATE curso_inscrito
 		SET finalizado = 1
 		WHERE id_curso_inscrito = sp_id_curso_inscrito;
-        
-        select 1 as codigo,
-		concat('Se actualizo correctamente la informacion') as mensaje;
+        SELECT sp_id_curso_inscrito as id_curso_inscrito, 1 as codigo, concat("registro exitoso") as mensaje;	
     end if;
 
 	if opcion =	'I' then
@@ -333,14 +331,20 @@ in opcion 			varchar(100)
 )
 SQL SECURITY INVOKER
 begin
-    if opcion = 'CursoInscritoInfo' then
+	if opcion = 'suma_total_alumnos' then
+		SELECT SUM(total_alumnos) AS suma_total_alumnos
+		FROM vista_pagos_cursos
+		WHERE id_usuario = sp_id;
+    end if;
+    
+	if opcion = 'CursoInscritoInfo' then
 		select a.id_curso AS idcurso, a.titulo AS titulo_curso, a.descripcion AS descripcion_curso, a.imagen AS imagen_curso,
-		b.fecha_inscripcion, b.finalizado
+		b.id_curso_inscrito, b.fecha_inscripcion, b.finalizado, b.id_curso_inscrito
 		from curso AS a
 		JOIN curso_inscrito AS b
 		ON b.id_curso_f = a.id_curso
 		where b.id_usuario_f = sp_id;
-    end if;
+	end if;
     
 	if opcion =	'TotalRegistros' then
 		SELECT COUNT(*) AS total_filas
@@ -371,6 +375,15 @@ begin
 		JOIN Recursos r ON n.id_nivel = r.id_nivel_f
 		where ci.id_usuario_f = sp_id;
     end if;
+    
+	if opcion = 'VerCursoHistorial' then
+		select id_curso, id_usuario_f, a.titulo as titulo_curso, a.descripcion as descripcion_curso, a.costo as costo_curso, a.imagen as imagen_curso,
+		id_nivel, id_curso_f, b.titulo as titulo_nivel, resumen, b.costo as costo_nivel
+		from curso as A
+		JOIN nivel as B
+		ON A.id_curso = B.id_curso_f
+		WHERE a.id_curso = sp_id;
+	end if;
 
 	if opcion = 'VerCursoNivel' then
 		select id_curso, id_usuario_f, a.titulo as titulo_curso, a.descripcion as descripcion_curso, a.costo as costo_curso, a.imagen as imagen_curso,
@@ -458,6 +471,12 @@ in opcion 			varchar(100)
 )
 SQL SECURITY INVOKER
 begin
+	if opcion = 'vista_pagos_cursos' then
+		SELECT id_pago_curso, forma_pago, titulo, total_ventas, total_alumnos, id_usuario
+		FROM vista_pagos_cursos 
+        WHERE id_usuario = idusuario;
+	end if;
+    
 	if opcion = 'vista_curso_inscrito' then
 		SELECT vista.fecha_inscripcion, vista.finalizado, vista.id_usuario_f, vista.titulo, vista.id_curso
 		FROM vista_curso_inscrito AS vista

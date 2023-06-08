@@ -17,6 +17,17 @@ end$$
 DELIMITER ;
 
 #----------------------------------------------------------------#
+DROP VIEW IF EXISTS vista_pagos_cursos;
+CREATE VIEW vista_pagos_cursos AS
+SELECT a.id_pago_curso, a.forma_pago, curso.titulo, 
+SUM(a.cantidada_pago) AS total_ventas, 
+COUNT(curso_inscrito.id_usuario_f) AS total_alumnos, usuario.id_usuario
+FROM pago_curso AS a
+JOIN curso_inscrito ON a.id_curso_inscrito_f = curso_inscrito.id_curso_inscrito
+JOIN curso ON curso_inscrito.id_curso_f = curso.id_curso
+JOIN usuario ON curso.id_usuario_f = usuario.id_usuario
+GROUP BY curso.titulo;
+#----------------------------------------------------------------#
 DROP VIEW IF EXISTS vista_curso;
 CREATE VIEW vista_curso AS
 SELECT titulo, descripcion, imagen

@@ -40,6 +40,7 @@ if (isset($_SESSION['acceso'])) {
             $menu .= '<ul><li><a href="Chat.php"><i class="fa-sharp fa-regular fa-comments"></i> Chat</a></li>';
             $menu .= '<li><a href="MiPerfil.php"><i class="fa fa-duotone fa-eye"></i> Mi Perfil</a></li>';
             $menu .= '<li><a href="Dashboard.php"><i class="fa-solid fa-circle-plus"></i> Mis Cursos</a></li>';
+            $menu .= '<li><a href="CursosVendidos.php"><i class="fa-sharp fa-solid fa-list-ul" style="color: #ffffff;"></i> Cursos Vendidos</a></li>';
             $menu .= '<li><a href="" id="salir">';
             $menu .= '<i class="fa fa-sharp fa-solid fa-arrow-right-from-bracket"></i> Cerrar Sesión</a></li>';
             $menu .= '</ul></li></ul></nav></div>';

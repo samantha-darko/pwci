@@ -106,33 +106,45 @@ function infocurso() {
 }
 
 function Mostrar(resultado) {
-    if (resultado['id_curso'] < 261296) {
+    if (resultado === "Este curso se ha eliminado") {
         document.querySelector("#ventana-modal").style.display = "block";
         $(".modal").append("<div class='contenido-modal'><i class='fa-sharp fa-solid fa-circle-xmark'></i>" +
-            "<div class='aviso-modal'><p>Verifique sus datos</p> <h2>No se encontro ningun curso con ese id.</h2></div></div>");
+            "<div class='aviso-modal'><p>Verifique sus datos</p> <h2>Este curso se ha eliminado</h2></div></div>");
         setTimeout(function () {
             $(".contenido-modal").remove();
             document.querySelector("#ventana-modal").style.display = "none";
             window.scrollTo({ top: 100, behavior: 'smooth' })
         }, 3000)
     } else {
-        document.querySelector("#idcurso").setAttribute("value", resultado['id_curso'])
-        fotocurso.src = "data:image/png;base64," + resultado['imagen'];
-        titulo.setAttribute("value", resultado['titulo'])
-        descripcion.innerText = resultado['descripcion']
-        if (resultado['costo'] > "0.00") {
-            preciocurso.style.display = "block"
-            costocurso.setAttribute("value", resultado['costo'])
-            tipo.innerText = 'Por curso'
-            document.querySelector("#price").style.display = "block"
-            document.querySelector("#price").innerText = resultado['costo']
+        if (resultado['id_curso'] != "") {
+            document.querySelector("#idcurso").setAttribute("value", resultado['id_curso'])
+            fotocurso.src = "data:image/png;base64," + resultado['imagen'];
+            titulo.setAttribute("value", resultado['titulo'])
+            descripcion.innerText = resultado['descripcion']
+            if (resultado['costo'] > "0.00") {
+                preciocurso.style.display = "block"
+                costocurso.setAttribute("value", resultado['costo'])
+                tipo.innerText = 'Por curso'
+                document.querySelector("#price").style.display = "block"
+                document.querySelector("#price").innerText = resultado['costo']
+            } else {
+                preciocurso.style.display = "none"
+                document.querySelector("#price").innerText = "N/A"
+            }
+            document.querySelector("#foto").src = "data:image/png;base64," + resultado['imagen'];
+            document.querySelector("#tittle").innerText = resultado['titulo']
+            document.querySelector("#description").innerText = resultado['descripcion']
         } else {
-            preciocurso.style.display = "none"
-            document.querySelector("#price").innerText = "N/A"
+            document.querySelector("#ventana-modal").style.display = "block";
+            $(".modal").append("<div class='contenido-modal'><i class='fa-sharp fa-solid fa-circle-xmark'></i>" +
+                "<div class='aviso-modal'><p>Verifique sus datos</p> <h2>No se encontro ningun curso con ese id.</h2></div></div>");
+            setTimeout(function () {
+                $(".contenido-modal").remove();
+                document.querySelector("#ventana-modal").style.display = "none";
+                window.scrollTo({ top: 100, behavior: 'smooth' })
+            }, 3000)
         }
-        document.querySelector("#foto").src = "data:image/png;base64," + resultado['imagen'];
-        document.querySelector("#tittle").innerText = resultado['titulo']
-        document.querySelector("#description").innerText = resultado['descripcion']
+
     }
 }
 
@@ -168,6 +180,18 @@ $(document).ready(function () {
         e.preventDefault();
         document.querySelector('#info').style.display = "none";
         document.querySelector('#datos').style.display = "block";
+    })
+
+    document.querySelector('#btnEliminar').addEventListener('click', function (e) {
+        e.preventDefault();
+        let id = sessionStorage.getItem('curso')
+        $.ajax({
+            url: '../php/EliminarCurso.php?curso='+id,
+            success: function (resultado) {
+                var res = JSON.parse(resultado)
+                console.log(res)
+            }
+        })
     })
 
     document.querySelector('#btnCancelar').addEventListener('click', function (e) {

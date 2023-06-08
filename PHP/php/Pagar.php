@@ -16,7 +16,7 @@ for ($i = 0; $i < count($niveles); $i++) {
     $nivel = $niveles[$i];
     $db = new DB();
     $conn = $db->connect();
-    $stmt = $conn->prepare('call sp_inscribir_curso(0, ?, ?, ?, 0,"I");');
+    $stmt = $conn->prepare('call sp_inscribir_curso(0, ?, ?, 0, 0,"I");');
     $stmt->bindValue(1, $idcurso);
     $stmt->bindValue(2, $usuario);
     $stmt->bindValue(3, $nivel);

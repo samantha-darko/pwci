@@ -5,6 +5,22 @@ function editar(idcurso) {
     window.location.href = '../paginas/VerCursoMaestro.php?curso=' + idcurso;
 }
 
+function ver(idcurso) {
+    /*$.ajax({
+        url: '../php/VerCursoHistorial.php?curso=' + idcurso,
+        success: function (resultado) {
+            let res = JSON.parse(resultado);
+            const infocurso = Object.values(res);
+            sessionStorage.setItem('infocurso', infocurso);
+        }
+    })
+    if ("infocurso" in sessionStorage) {
+        let infocurso = sessionStorage.getItem('infocurso');
+        console.log(infocurso)
+    }*/
+    window.location.href = '../paginas/VerCurso.php?curso=' + idcurso;
+}
+
 function VerificarSesion() {
     if (!("idusuario" in sessionStorage)) {
         window.location.href = "../paginas/IniciarSesion.php"
