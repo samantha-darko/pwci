@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="es-ES">
 <?php session_start();
-include_once "..\php\UsuarioLoggeado.php";
+include_once "../php/UsuarioLoggeado.php";
 //include_once "..\php\VerCurso.php";
 ?>
 

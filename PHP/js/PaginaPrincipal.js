@@ -38,6 +38,10 @@ function VerificarSesion() {
     if (!("idusuario" in sessionStorage)) {
         window.location.href = "../paginas/IniciarSesion.php"
     }
+    if ("total" in sessionStorage)
+        sessionStorage.removeItem("total")
+    if ("curso" in sessionStorage)
+        sessionStorage.removeItem("curso")
 }
 
 document.addEventListener("DOMContentLoaded", VerificarSesion)

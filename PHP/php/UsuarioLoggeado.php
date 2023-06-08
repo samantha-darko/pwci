@@ -20,6 +20,7 @@ if (isset($_SESSION['acceso'])) {
             $menu .= '<li><a href="PaginaPrincipal.php"><img src="data:png;base64,' . base64_encode($datos->imagen) . '"/>';
             $menu .= '<label>' . $datos->nombre . '</label></a>';
             $menu .= '<ul><li><a href="Chat.php"><i class="fa-sharp fa-regular fa-comments"></i> Chat</a></li>';
+            $menu .= '<li><a href="Kardex.php"><i class="fa-sharp fa-solid fa-list-ul" style="color: #ffffff;"></i> Kardex</a></li>';
             $menu .= '<li><a href="MiPerfil.php"><i class="fa fa-duotone fa-eye"></i> Mi Perfil</a></li>';
             $menu .= '<li><a href="MisCursos.php"><i class="fa-solid fa-circle-plus"></i> Mis Cursos</a></li>';
             $menu .= '<li><a href="" id="salir">';

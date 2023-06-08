@@ -3,6 +3,196 @@
 include_once("conexion.php");
 include_once("Clases.php");
 
+class ApiAlumno
+{
+    public function VerCurso($idcurso)
+    {
+        try {
+            $db = new DB();
+            $conn = $db->connect();
+            if (is_array($conn)) {
+                $msj = $conn['error'];
+                return $msj;
+            }
+            $sql = "CALL sp_consulta(?, 0, 0, 'VerCursoNivel');";
+            $stmt = $conn->prepare($sql);
+            $stmt->bindValue(1, $idcurso);
+            $stmt->execute();
+
+            $result = array();
+            while ($row = $stmt->fetch()) {
+                $result = array(
+                    "id_curso" => $row['id_curso'],
+                    "id_usuario_f" => $row['id_usuario_f'],
+                    "titulo_curso" => $row['titulo_curso'],
+                    "descripcion_curso" => $row['descripcion_curso'],
+                    "costo_curso" => $row['costo_curso'],
+                    "imagen_curso" => $row['imagen_curso'],
+                    "id_nivel" => $row['id_nivel'],
+                    "id_curso_f" => $row['id_curso_f'],
+                    "titulo_nivel" => $row['titulo_nivel'],
+                    "resumen" => $row['resumen'],
+                    "costo_nivel" => $row['costo_nivel']
+                );
+            }
+
+            if (!empty($result)) {
+                return $result;
+            }
+        } catch (PDOException $e) {
+            $msj = "Error en servidor: " . $e->getMessage();
+        }
+    }
+    public function Kardex($idusuario)
+    {
+        try {
+            $db = new DB();
+            $conn = $db->connect();
+            if (is_array($conn)) {
+                $msj = $conn['error'];
+                return $msj;
+            }
+            $sql = ("call sp_vista(?,'vista_curso_inscrito');");
+            $stmt = $conn->prepare($sql);
+            $stmt->bindValue(1, $idusuario);
+            $stmt->execute();
+            $result = $stmt->fetchAll((PDO::FETCH_ASSOC));
+            $array = [];
+
+            foreach ($result as $row) {
+                $array[] = array(
+                    'fecha_inscripcion' => $row['fecha_inscripcion'],
+                    'finalizado' => $row['finalizado'],
+                    'id_usuario_f' => $row['id_usuario_f'],
+                    'titulo' => $row['titulo'],
+                    'id_curso' => $row['id_curso']
+                );
+            }
+            return $array;
+        } catch (PDOException $e) {
+            $msj = "Error en servidor: " . $e->getMessage();
+            return $msj;
+        }
+    }
+
+    public function FinalizarCurso($idcursoinscrito)
+    {
+        try {
+            $db = new DB();
+            $conn = $db->connect();
+            if (is_array($conn)) {
+                $msj = $conn['error'];
+                return $msj;
+            }
+            $sql = ("call sp_inscribir_curso(?, 0, 0, 0, 1, 'finalizarcursoinscrito');");
+            $stmt = $conn->prepare($sql);
+            $stmt->bindValue(1, $idcursoinscrito);
+            $stmt->execute();
+            if ($stmt->rowCount() > 0) {
+                $row = $stmt->fetch();
+                $msj = array($row['codigo'], $row['mensaje']);
+            } else
+                $msj = false;
+            return $msj;
+        } catch (PDOException $e) {
+            $msj = "Error en servidor: " . $e->getMessage();
+            return $msj;
+        }
+    }
+
+    public function vista_recursos_curso()
+    {
+        try {
+            $db = new DB();
+            $conn = $db->connect();
+            if (is_array($conn)) {
+                $msj = $conn['error'];
+                return $msj;
+            }
+            $sql = ("call sp_vista(0,'vista_recursos_curso');");
+            $stmt = $conn->prepare($sql);
+            $stmt->execute();
+            if ($stmt->rowCount() > 0) {
+                $row = $stmt->fetch();
+                $msj = array($row['codigo'], $row['mensaje']);
+            } else
+                $msj = false;
+            return $msj;
+        } catch (PDOException $e) {
+            $msj = "Error en servidor: " . $e->getMessage();
+            return $msj;
+        }
+    }
+
+    public function ListaCursoInscrito($iduser)
+    {
+        try {
+            $db = new DB();
+            $conn = $db->connect();
+            if (is_array($conn)) {
+                $msj = $conn['error'];
+                return $msj;
+            }
+            $sql = ("call sp_consulta(?, 0, 0, 'CursoInscritoInfo');");
+            $stmt = $conn->prepare($sql);
+            $stmt->bindValue(1, $iduser);
+
+            $stmt->execute();
+            $result = $stmt->fetchAll((PDO::FETCH_ASSOC));
+            $array = [];
+
+            foreach ($result as $row) {
+                $array[] = array(
+                    'idcurso' => $row['idcurso'],
+                    'titulo_curso' => $row['titulo_curso'],
+                    'descripcion_curso' => $row['descripcion_curso'],
+                    'imagen_curso' => $row['imagen_curso'],
+                    'fecha_inscripcion' => $row['fecha_inscripcion'],
+                    'finalizado' => $row['finalizado']
+                );
+            }
+            return $array;
+        } catch (PDOException $e) {
+            $msj = "Error en servidor: " . $e->getMessage();
+            return $msj;
+        }
+    }
+
+    public function ListaRecursos($iduser)
+    {
+        try {
+            $db = new DB();
+            $conn = $db->connect();
+            if (is_array($conn)) {
+                $msj = $conn['error'];
+                return $msj;
+            }
+            $sql = ("select * from vista_recursos_curso where id_curso_inscrito=?;");
+            $stmt = $conn->prepare($sql);
+            $stmt->bindValue(1, $iduser);
+
+            $stmt->execute();
+            $result = $stmt->fetchAll((PDO::FETCH_ASSOC));
+            $array = [];
+
+            foreach ($result as $row) {
+                $array[] = array(
+                    "id_recursos" => $row['id_recursos'],
+                    "recurso" => $row['recurso'],
+                    "tipo" => $row['tipo'],
+                    "contenido" => $row['contenido'],
+                    "titulo_curso" => $row['curso']
+                );
+            }
+            return $array;
+        } catch (PDOException $e) {
+            $msj = "Error en servidor: " . $e->getMessage();
+        }
+
+        return $msj;
+    }
+}
+
 class ApiCliente
 {
     public function Agregar($datos)
@@ -398,7 +588,8 @@ class ApiCurso
             $msj = "Error en servidor: " . $e->getMessage();
         }
     }
-    public function VerCurso($idcurso)
+
+        public function VerCurso($idcurso)
     {
         try {
             $db = new DB();
@@ -435,6 +626,7 @@ class ApiCurso
             $msj = "Error en servidor: " . $e->getMessage();
         }
     }
+    
     function LosMasVistos()
     {
         try {

@@ -2,7 +2,7 @@
 <html lang="es">
 <?php session_start();
 include_once '../php/UsuarioLoggeado.php';
-include_once '../php/CursoInscritoAlumno.php';
+include_once '../php/Kardex.php';
 ?>
 
 <head>
@@ -15,11 +15,11 @@ include_once '../php/CursoInscritoAlumno.php';
     <script type="text/javascript" src="../boostrap/js/bootstrap.min.js"></script>
 
     <link rel="stylesheet" href="../css/base.css">
-    <link rel="stylesheet" href="../css/MisCursos.css">
+    <link rel="stylesheet" href="../css/Kardex.css">
 
     <link rel="shortcut icon" href="../multmedia/logo.png" />
 
-    <title>Mis Cursos | Alumno</title>
+    <title>Kardex | Alumno</title>
 </head>
 
 <body>
@@ -40,7 +40,7 @@ include_once '../php/CursoInscritoAlumno.php';
 
 
     <div class="box-container" id="box-container">
-
+        <h2>Kardex</h2>
         <?php echo $items; ?>
     </div>
 
@@ -52,7 +52,7 @@ include_once '../php/CursoInscritoAlumno.php';
     </div>
 
     <script src="../js/jquery-3.6.0.min.js"></script>
-    <script src="../js/MisCursos.js"></script>
+    <script src="../js/Kardex.js"></script>
 </body>
 
 </html>

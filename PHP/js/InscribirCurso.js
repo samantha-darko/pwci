@@ -79,8 +79,18 @@ paypal.Buttons({
         })
     },
     onCancel: function (data) {
-        alert("Pago cancelado")
+        document.getElementById("ventana-modal").style.display = "block"
+        $(".modal").append("<div class='contenido-modal'> <a href='login.php'><i class='fa-sharp fa-solid fa-circle-xmark'></i><div class='aviso-modal'></a>" +
+            "<div class='aviso-modal'> <p>Cancelado</p> <h2>No se concluyo la inscripcion al curso.</h2> </div> </div>");
+        setTimeout(function () {
+            $(".contenido-modal").remove();
+            document.getElementById("ventana-modal").style.display = "none"
+        }, 3000)
         console.log(data)
+        if ("total" in sessionStorage)
+            sessionStorage.removeItem("total")
+        if ("curso" in sessionStorage)
+            sessionStorage.removeItem("curso")
     },
     onApprove: function (data, actions) {
         return actions.order.capture().then(function (details) {
@@ -116,6 +126,10 @@ paypal.Buttons({
                     }, 3000)
                 }
             });
+            if ("total" in sessionStorage)
+                sessionStorage.removeItem("total")
+            if ("curso" in sessionStorage)
+                sessionStorage.removeItem("curso")
         });
     }
 }).render('#paypal-button-container');
