@@ -2,7 +2,6 @@
 include_once 'Api.php';
 $items = "";
 try {
-    //$api = new ApiCurso();
     $api = new ApiAlumno();
 
     $curso = $_GET["curso"];
@@ -15,7 +14,6 @@ try {
     $items .= '<img src="data:png;base64,' . base64_encode($ListaCursoInscrito['imagen_curso']) . '"/>';
     $items .= '<h2>' . $ListaCursoInscrito['titulo_curso'] . '</h2>';
     $items .= '<h4>' . $ListaCursoInscrito['descripcion_curso'] . '</h4>';
-    //$items .= '<label>Fecha de Inscripcion: ' . $ListaCursoInscrito[$i]['fecha_inscripcion'] . '</label>';
     $items .= '</div>';
     $items .= '<div class="nivel">';
     $ListaRecursos = $api->ListaRecursos($idcurso);
@@ -33,14 +31,7 @@ try {
         $items .= '</div>';
     }
     $items .= '</div>';
-    /*if ($ListaCursoInscrito[$i]['finalizado'] === 0) {
-        $items .= '<button onclick="finalizar(' . $idcurso . ')" id=' . $ListaCursoInscrito[$i]['fecha_inscripcion'] . '>Finalizar Curso</button>';
-    } else {
-        $items .= '<p>Este curso ya esta finalizado</p>';
-    }*/
     $items .= '</div>';
-
-    //echo json_encode($msj);
 
 } catch (PDOException $e) {
     $msj = "Error en servidor: " . $e->getMessage();
