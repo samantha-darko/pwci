@@ -484,18 +484,7 @@ begin
 	end if;
     
 	if opcion = 'vista_recursos_curso' then
-		DROP VIEW IF EXISTS vista_recursos_curso;
-		CREATE VIEW vista_recursos_curso AS
-		SELECT ci.id_curso_inscrito, c.titulo AS curso, 
-        r.id_recursos, r.nombre AS recurso, r.tipo, r.contenido,
-        n.titulo AS titulo_curso
-		FROM curso_inscrito ci
-		JOIN curso c ON ci.id_curso_f = c.id_curso
-		JOIN nivel n ON n.id_curso_f = c.id_curso
-		JOIN recursos r ON r.id_nivel_f = n.id_nivel;
-        
-        select 1 as codigo,
-		concat('se ha actualizado la vista correctamente') as mensaje;
+		
 	end if;
 end$$
 DELIMITER ;

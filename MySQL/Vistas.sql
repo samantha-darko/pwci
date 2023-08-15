@@ -38,13 +38,3 @@ B.resumen, B.costo AS costo_nivel
 FROM curso AS A
 JOIN nivel AS B
 ON A.id_curso = B.id_curso_f;
-#------------------ VISTA RECURSOS CURSO ------------------------#
-DROP VIEW IF EXISTS vista_recursos_curso;
-CREATE VIEW vista_recursos_curso AS
-SELECT ci.id_curso_inscrito, c.titulo AS curso, 
-r.id_recursos, r.nombre AS recurso, r.tipo, r.contenido,
-n.titulo AS titulo_curso
-FROM curso_inscrito ci
-JOIN curso c ON ci.id_curso_f = c.id_curso
-JOIN nivel n ON n.id_curso_f = c.id_curso
-JOIN recursos r ON r.id_nivel_f = n.id_nivel;
